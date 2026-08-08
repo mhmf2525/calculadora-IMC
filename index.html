@@ -1,356 +1,165 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f4f7fb" />
-  <meta name="description" content="Calculadora de IMC com referências para adultos, orientações gerais de alimentação e exercícios em casa." />
-  <title>Calculadora de IMC</title>
-  <style>
-    :root{
-      color-scheme:light;
-      --bg:#f4f7fb;
-      --surface:#ffffff;
-      --surface-2:#f8fafc;
-      --border:#dbe3ec;
-      --text:#1e293b;
-      --muted:#64748b;
-      --title:#0f172a;
-      --primary:#0f6fbf;
-      --primary-soft:#eaf4fd;
-      --success:#15803d;
-      --warning:#b45309;
-      --danger:#dc2626;
-      --shadow:0 18px 45px rgba(15,23,42,.08);
-    }
-    html[data-theme="dark"]{
-      color-scheme:dark;
-      --bg:#0b1220;
-      --surface:#111b2d;
-      --surface-2:#0e1727;
-      --border:#243247;
-      --text:#cbd5e1;
-      --muted:#8fa0b5;
-      --title:#f8fafc;
-      --primary:#38bdf8;
-      --primary-soft:#0b2638;
-      --success:#4ade80;
-      --warning:#fbbf24;
-      --danger:#f87171;
-      --shadow:0 18px 45px rgba(0,0,0,.22);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    body{transition:background .2s,color .2s}
-    button,input{font:inherit}
-    button{cursor:pointer}
-    .shell{width:min(100%,1080px);margin:0 auto;padding:22px 14px 42px}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
-    .brand{display:flex;align-items:center;gap:11px}
-    .brand-mark{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--primary);color:#fff;font-weight:800;box-shadow:var(--shadow)}
-    .brand-text strong{display:block;color:var(--title);font-size:1rem}
-    .brand-text span{display:block;margin-top:2px;color:var(--muted);font-size:.76rem}
-    .theme-toggle{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:10px;padding:9px 12px;font-size:.8rem;font-weight:700;box-shadow:var(--shadow)}
-    .theme-toggle:hover{border-color:var(--primary);color:var(--primary)}
-    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:7px;box-shadow:var(--shadow)}
-    .tab{border:0;background:transparent;color:var(--muted);padding:11px 10px;border-radius:10px;font-size:.84rem;font-weight:800;transition:.18s}
-    .tab:hover{background:var(--surface-2);color:var(--title)}
-    .tab[aria-selected="true"]{background:var(--primary);color:#fff}
-    .panel{display:none}
-    .panel.active{display:block}
-    .section-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
-    .section-head{margin-bottom:18px}
-    .section-head h1,.section-head h2{margin:0;color:var(--title);font-size:clamp(1.4rem,4vw,2rem);line-height:1.15}
-    .section-head p{margin:7px 0 0;color:var(--muted);font-size:.9rem;line-height:1.55}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .field{display:flex;flex-direction:column;gap:7px}
-    .field label{color:var(--title);font-size:.79rem;font-weight:800}
-    .input-wrap{display:flex;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-    .input-wrap:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 14%,transparent)}
-    .input-wrap input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--title);padding:13px 14px;font-size:1rem}
-    .unit{padding:0 14px;color:var(--primary);font-size:.75rem;font-weight:800;white-space:nowrap}
-    .helper{color:var(--muted);font-size:.72rem;line-height:1.45}
-    .error{min-height:20px;color:var(--danger);font-size:.76rem;margin-top:8px}
-    .actions{display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:4px}
-    .primary,.secondary{border-radius:11px;padding:12px 16px;font-weight:800;font-size:.85rem}
-    .primary{border:1px solid var(--primary);background:var(--primary);color:#fff}
-    .primary:hover{filter:brightness(.95)}
-    .secondary{border:1px solid var(--border);background:var(--surface);color:var(--text)}
-    .secondary:hover{border-color:var(--primary);color:var(--primary)}
-    .result{display:none;margin-top:14px;border:1px solid color-mix(in srgb,var(--primary) 55%,var(--border));background:var(--primary-soft);border-radius:14px;padding:18px}
-    .result.show{display:block}
-    .result-label{color:var(--muted);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .result-main{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:8px}
-    .imc-value{color:var(--primary);font-size:clamp(2.4rem,9vw,4rem);font-weight:900;line-height:1}
-    .imc-value small{font-size:.75rem;color:var(--muted);font-weight:700}
-    .category{max-width:460px;text-align:right}
-    .category strong{display:block;color:var(--title);font-size:1rem}
-    .category span{display:block;margin-top:4px;color:var(--muted);font-size:.82rem;line-height:1.5}
-    .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--border) 70%,transparent)}
-    .chip{border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:5px 9px;color:var(--muted);font-size:.72rem}
-    .reference{margin-top:16px}
-    .reference h3{margin:0 0 9px;color:var(--title);font-size:1rem}
-    .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:13px}
-    table{width:100%;border-collapse:collapse;min-width:650px}
-    th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:.78rem;vertical-align:top}
-    th{background:var(--surface-2);color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
-    tr:last-child td{border-bottom:0}
-    .range{white-space:nowrap;font-weight:800}
-    .ob1{color:var(--warning);font-weight:800}
-    .ob2{color:#ea580c;font-weight:800}
-    .ob3{color:var(--danger);font-weight:800}
-    .notice{margin-top:13px;border:1px solid var(--border);border-left:4px solid var(--warning);border-radius:11px;padding:12px 14px;background:var(--surface-2);color:var(--muted);font-size:.78rem;line-height:1.55}
-    .notice strong{color:var(--title)}
-    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .info-card{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:16px}
-    .info-card h3{margin:0;color:var(--title);font-size:.95rem}
-    .info-card p{margin:7px 0 0;color:var(--muted);font-size:.82rem;line-height:1.55}
-    .meal-list,.exercise-list{display:grid;gap:10px;margin-top:14px}
-    .meal,.exercise{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:start;border:1px solid var(--border);background:var(--surface-2);border-radius:13px;padding:13px}
-    .meal strong,.exercise strong{color:var(--primary);font-size:.8rem}
-    .meal span,.exercise span{color:var(--text);font-size:.82rem;line-height:1.5}
-    .routine-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-    .routine-head b{color:var(--title);font-size:.9rem}
-    .routine-head span{color:var(--muted);font-size:.74rem}
-    .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:.72rem;line-height:1.5}
-    @media(max-width:760px){
-      .shell{padding:14px 9px 30px}
-      .topbar{align-items:flex-start}
-      .brand-text span{display:none}
-      .tabs{grid-template-columns:1fr;gap:5px}
-      .tab{text-align:left}
-      .section-card{padding:16px}
-      .form-grid,.cards{grid-template-columns:1fr}
-      .actions{grid-template-columns:1fr}
-      .category{text-align:left;max-width:none}
-      .meal,.exercise{grid-template-columns:1fr;gap:4px}
-      .theme-toggle{padding:8px 10px}
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#f4f7fb" />
+<meta name="description" content="Calculadora de IMC com plano alimentar geral, exercícios e acompanhamento de hábitos para adultos." />
+<title>Saúde em Foco | IMC e Rotina</title>
+<style>
+:root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--line:#dbe4ee;--text:#334155;--muted:#64748b;--bright:#0f172a;--brand:#2563eb;--brand2:#1d4ed8;--green:#15803d;--yellow:#b45309;--red:#dc2626;--purple:#7c3aed;--shadow:0 16px 40px rgba(15,23,42,.08)}
+html[data-theme="dark"]{color-scheme:dark;--bg:#08111f;--panel:#0f1b2d;--panel2:#0b1626;--line:#24344a;--text:#cbd5e1;--muted:#7f8da3;--bright:#f8fafc;--brand:#60a5fa;--brand2:#93c5fd;--green:#4ade80;--yellow:#fbbf24;--red:#f87171;--purple:#c4b5fd;--shadow:0 16px 40px rgba(0,0,0,.24)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body{padding:18px 12px 36px;transition:.2s}button,input,select{font:inherit}button{cursor:pointer}.app{width:min(100%,1080px);margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:10px}.brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand),#0ea5e9);display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--shadow)}.brand b{display:block;color:var(--bright);font-size:1rem}.brand span{display:block;color:var(--muted);font-size:.76rem;margin-top:2px}.theme{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:9px 12px;font-weight:700}.hero{background:linear-gradient(135deg,color-mix(in srgb,var(--brand) 13%,var(--panel)),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:14px}.hero h1{margin:0;color:var(--bright);font-size:clamp(1.65rem,4vw,2.35rem)}.hero p{margin:8px 0 0;color:var(--muted);line-height:1.55;max-width:780px}.tabs{display:flex;gap:7px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:thin}.tab-btn,.subtab-btn{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 14px;font-weight:800}.tab-btn.active,.subtab-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}.tab-panel{display:none}.tab-panel.active{display:block}.section{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:12px}.section h2,.section h3{color:var(--bright);margin:0}.section h2{font-size:1.2rem}.section h3{font-size:1rem}.section-desc{color:var(--muted);font-size:.86rem;line-height:1.55;margin:6px 0 0}.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:.75rem;font-weight:800;color:var(--text)}.input-wrap{display:flex;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:10px;overflow:hidden}.input-wrap:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 12%,transparent)}.input-wrap input,.input-wrap select{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--bright);padding:12px}.unit{padding:0 10px;color:var(--brand);font-weight:800;font-size:.72rem}.helper{font-size:.68rem;color:var(--muted)}.actions{display:flex;gap:8px;margin-top:14px}.primary,.secondary{border-radius:10px;padding:11px 16px;font-weight:800}.primary{border:1px solid var(--brand);background:var(--brand);color:#fff}.secondary{border:1px solid var(--line);background:var(--panel);color:var(--text)}.error{min-height:18px;color:var(--red);font-size:.76rem;margin-top:8px}.result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.metric{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.metric span{display:block;color:var(--muted);font-size:.72rem}.metric b{display:block;color:var(--bright);font-size:1.18rem;margin-top:4px}.result-box{display:none;margin-top:14px;border:1px solid color-mix(in srgb,var(--brand) 35%,var(--line));background:color-mix(in srgb,var(--brand) 6%,var(--panel));border-radius:14px;padding:16px}.result-box.show{display:block}.result-main{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap}.imc-value{font-size:2.7rem;font-weight:900;color:var(--brand);line-height:1}.imc-value small{font-size:.75rem;color:var(--muted)}.category{text-align:right}.category b{display:block;color:var(--bright)}.category span{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}.profile-badge{margin-top:10px;color:var(--muted);font-size:.75rem}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:14px}table{width:100%;border-collapse:collapse;min-width:640px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:.78rem}th{background:var(--panel2);color:var(--muted);font-size:.7rem}tr:last-child td{border-bottom:0}.notice{border-left:4px solid var(--brand);background:var(--panel2);border-radius:10px;padding:11px 13px;color:var(--text);font-size:.78rem;line-height:1.55;margin-top:12px}.notice.warning{border-left-color:var(--yellow)}.notice strong{color:var(--bright)}.locked{display:none}.locked.show{display:block}.subtabs{display:flex;gap:7px;overflow-x:auto;margin:14px 0 12px}.subtab-panel{display:none}.subtab-panel.active{display:block}.week-grid{display:grid;grid-template-columns:repeat(7,minmax(190px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px}.day-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:190px}.day-card h4{margin:0 0 10px;color:var(--bright)}.meal{border-top:1px solid var(--line);padding:9px 0}.meal:first-of-type{border-top:0;padding-top:0}.meal b{display:block;color:var(--brand);font-size:.74rem;margin-bottom:5px}.meal ol{margin:0;padding-left:17px}.meal li{font-size:.72rem;color:var(--text);line-height:1.45;margin:3px 0}.schedule{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.session{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.session .day{color:var(--brand);font-size:.72rem;font-weight:900;text-transform:uppercase}.session h4{margin:5px 0;color:var(--bright)}.session ul{margin:8px 0 0;padding-left:18px}.session li{font-size:.78rem;line-height:1.5;margin:5px 0}.goal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.goal-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.goal-card span{display:block;color:var(--muted);font-size:.72rem}.goal-card b{display:block;color:var(--bright);margin-top:5px;font-size:1.05rem}.checklist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.check{border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:10px;font-size:.78rem;color:var(--text)}.footer{margin-top:18px;text-align:center;color:var(--muted);font-size:.7rem}.ob1{color:var(--yellow)}.ob2{color:#f97316}.ob3{color:var(--red)}
+@media(max-width:900px){.form-grid,.result-grid,.goal-grid{grid-template-columns:repeat(2,1fr)}.schedule{grid-template-columns:1fr}.checklist{grid-template-columns:1fr}}
+@media(max-width:600px){body{padding:10px 7px 28px}.topbar{align-items:flex-start}.brand span{display:none}.hero{padding:16px}.form-grid,.result-grid,.goal-grid{grid-template-columns:1fr}.actions{display:grid;grid-template-columns:1fr}.tab-btn,.subtab-btn{padding:9px 11px;font-size:.78rem}.section{padding:14px}.result-main{align-items:flex-start}.category{text-align:left}.week-grid{grid-template-columns:repeat(7,82vw)}}
+</style>
 </head>
 <body>
-  <main class="shell">
-    <div class="topbar">
-      <div class="brand">
-        <div class="brand-mark">IMC</div>
-        <div class="brand-text">
-          <strong>Calculadora de IMC</strong>
-          <span>Ferramenta informativa de bem-estar</span>
+<main class="app">
+  <div class="topbar">
+    <div class="brand"><div class="brand-mark">IMC</div><div><b>Saúde em Foco</b><span>Calculadora e organização de hábitos para adultos</span></div></div>
+    <button class="theme" id="themeButton" type="button">☾ Escuro</button>
+  </div>
+
+  <section class="hero">
+    <h1>Organize sua rotina de saúde em um só lugar.</h1>
+    <p>Informe seus dados para calcular o IMC adulto e liberar sugestões gerais de alimentação, cronogramas de exercício 3x por semana e uma área de metas baseada em hábitos.</p>
+  </section>
+
+  <nav class="tabs" role="tablist" aria-label="Seções principais">
+    <button class="tab-btn active" data-tab="imc" type="button">1. IMC</button>
+    <button class="tab-btn" data-tab="alimentacao" type="button">2. Plano de Alimentação</button>
+    <button class="tab-btn" data-tab="exercicios" type="button">3. Exercícios</button>
+    <button class="tab-btn" data-tab="meta" type="button">4. Meta</button>
+  </nav>
+
+  <section class="tab-panel active" id="tab-imc">
+    <div class="section">
+      <h2>Dados do perfil</h2>
+      <p class="section-desc">Campos obrigatórios para adultos de 20 a 65 anos. Para adultos, a categoria de IMC usa os mesmos cortes independentemente de idade e sexo.</p>
+      <form id="profileForm" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="idade">Idade</label><div class="input-wrap"><input id="idade" type="number" min="20" max="65" step="1" placeholder="Ex.: 34"><span class="unit">anos</span></div><div class="helper">Entre 20 e 65 anos.</div></div>
+          <div class="field"><label for="sexo">Sexo</label><div class="input-wrap"><select id="sexo"><option value="">Selecione</option><option value="feminino">Feminino</option><option value="masculino">Masculino</option></select></div><div class="helper">Usado para identificar o perfil das sugestões gerais.</div></div>
+          <div class="field"><label for="altura">Altura</label><div class="input-wrap"><input id="altura" type="text" inputmode="decimal" placeholder="183 ou 1,83"><span class="unit">cm / m</span></div><div class="helper">Aceita 183, 1.83 ou 1,83.</div></div>
+          <div class="field"><label for="peso">Peso</label><div class="input-wrap"><input id="peso" type="text" inputmode="decimal" placeholder="Ex.: 78,5"><span class="unit">kg</span></div><div class="helper">Vírgula ou ponto são aceitos.</div></div>
         </div>
+        <div id="erro" class="error" role="alert" aria-live="polite"></div>
+        <div class="actions"><button class="primary" type="submit">Calcular e gerar plano</button><button class="secondary" id="limpar" type="button">Limpar</button></div>
+      </form>
+
+      <div id="resultado" class="result-box">
+        <div class="result-main"><div><div class="imc-value"><span id="valorImc">--</span> <small>kg/m²</small></div><div class="profile-badge" id="profileBadge"></div></div><div class="category"><b id="categoria">—</b><span id="descricao">—</span></div></div>
       </div>
-      <button id="themeButton" class="theme-toggle" type="button">☾ Escuro</button>
     </div>
 
-    <nav class="tabs" role="tablist" aria-label="Seções da ferramenta">
-      <button class="tab" id="tab-imc" type="button" role="tab" aria-selected="true" aria-controls="panel-imc" data-target="panel-imc">1 · Cálculo do IMC</button>
-      <button class="tab" id="tab-alimentacao" type="button" role="tab" aria-selected="false" aria-controls="panel-alimentacao" data-target="panel-alimentacao">2 · Plano de alimentação</button>
-      <button class="tab" id="tab-exercicios" type="button" role="tab" aria-selected="false" aria-controls="panel-exercicios" data-target="panel-exercicios">3 · Exercícios em casa</button>
-    </nav>
+    <div class="section">
+      <h3>Valores de referência de IMC para adultos</h3>
+      <div class="table-wrap"><table><thead><tr><th>Classificação</th><th>IMC</th><th>Descrição</th></tr></thead><tbody>
+        <tr><td>Abaixo do peso</td><td>&lt; 18,5</td><td>Abaixo da faixa de referência adulta.</td></tr>
+        <tr><td>Peso saudável</td><td>18,5 a 24,9</td><td>Faixa de referência considerada saudável para adultos.</td></tr>
+        <tr><td>Sobrepeso</td><td>25,0 a 29,9</td><td>Acima da faixa de peso saudável.</td></tr>
+        <tr><td class="ob1">Obesidade Grau I · Classe 1</td><td class="ob1">30,0 a 34,9</td><td>Primeira classe da categoria de obesidade.</td></tr>
+        <tr><td class="ob2">Obesidade Grau II · Classe 2</td><td class="ob2">35,0 a 39,9</td><td>Segunda classe da categoria de obesidade.</td></tr>
+        <tr><td class="ob3">Obesidade Grau III · Classe 3</td><td class="ob3">≥ 40,0</td><td>Classe 3, também chamada de obesidade severa.</td></tr>
+      </tbody></table></div>
+      <div class="notice warning"><strong>Importante:</strong> IMC é uma medida de triagem. Ele não substitui avaliação clínica e não define sozinho saúde, composição corporal ou necessidade de alteração de peso.</div>
+    </div>
+  </section>
 
-    <section id="panel-imc" class="panel active" role="tabpanel" aria-labelledby="tab-imc">
-      <div class="section-card">
-        <div class="section-head">
-          <h1>Calcule seu IMC</h1>
-          <p>Informe altura e peso. A altura aceita formatos como 183, 1.83 ou 1,83.</p>
-        </div>
-
-        <form id="imcForm" novalidate>
-          <div class="form-grid">
-            <div class="field">
-              <label for="altura">Altura</label>
-              <div class="input-wrap">
-                <input id="altura" name="altura" type="text" inputmode="decimal" autocomplete="off" placeholder="183 ou 1,83" aria-describedby="erro" />
-                <span class="unit">cm / m</span>
-              </div>
-              <div class="helper">Exemplos válidos: 183, 1.83 ou 1,83.</div>
-            </div>
-
-            <div class="field">
-              <label for="peso">Peso</label>
-              <div class="input-wrap">
-                <input id="peso" name="peso" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex.: 72,5" aria-describedby="erro" />
-                <span class="unit">kg</span>
-              </div>
-              <div class="helper">Use quilogramas; vírgula ou ponto são aceitos.</div>
-            </div>
-          </div>
-
-          <div id="erro" class="error" role="alert" aria-live="polite"></div>
-          <div class="actions">
-            <button class="primary" type="submit">Calcular IMC</button>
-            <button class="secondary" type="button" id="limpar">Limpar</button>
-          </div>
-        </form>
-
-        <section id="resultado" class="result" aria-live="polite">
-          <div class="result-label">Resultado · referência adulta</div>
-          <div class="result-main">
-            <div class="imc-value"><span id="valorImc">--</span> <small>kg/m²</small></div>
-            <div class="category">
-              <strong id="categoria">—</strong>
-              <span id="descricao">—</span>
-            </div>
-          </div>
-          <div id="personData" class="chips"></div>
-        </section>
-
-        <div class="reference">
-          <h3>Valores de referência de IMC para adultos (20+)</h3>
-          <div class="table-wrap">
-            <table aria-label="Faixas de referência de IMC para adultos">
-              <thead><tr><th>Classificação</th><th>IMC</th><th>Descrição</th></tr></thead>
-              <tbody>
-                <tr><td>Abaixo do peso</td><td class="range">&lt; 18,5</td><td>Abaixo da faixa de referência considerada saudável para adultos.</td></tr>
-                <tr><td>Peso saudável</td><td class="range">18,5 a 24,9</td><td>Faixa de referência de peso saudável para adultos.</td></tr>
-                <tr><td>Sobrepeso</td><td class="range">25,0 a 29,9</td><td>Faixa acima do peso saudável e abaixo da categoria de obesidade.</td></tr>
-                <tr><td class="ob1">Obesidade Grau I · Classe 1</td><td class="range ob1">30,0 a 34,9</td><td>Primeira classe da categoria de obesidade em adultos.</td></tr>
-                <tr><td class="ob2">Obesidade Grau II · Classe 2</td><td class="range ob2">35,0 a 39,9</td><td>Segunda classe da categoria de obesidade em adultos.</td></tr>
-                <tr><td class="ob3">Obesidade Grau III · Classe 3</td><td class="range ob3">≥ 40,0</td><td>Classe 3 de obesidade, também chamada de obesidade severa.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="notice"><strong>Atenção:</strong> o IMC é uma medida de triagem e não substitui avaliação individual. As categorias desta aba são destinadas a adultos com 20 anos ou mais.</div>
+  <section class="tab-panel" id="tab-alimentacao">
+    <div class="section">
+      <h2>Plano de alimentação semanal</h2>
+      <p class="section-desc">Cronograma com 3 opções por refeição, de segunda a domingo. As opções são organizadas a partir do perfil informado, mas não prescrevem calorias nem porções individuais.</p>
+      <div id="foodLocked" class="notice warning show"><strong>Antes de continuar:</strong> preencha Idade, Sexo, Altura e Peso na aba IMC e clique em “Calcular e gerar plano”.</div>
+      <div id="foodContent" class="locked">
+        <div class="notice" id="foodProfile"></div>
+        <div class="week-grid" id="mealWeek"></div>
+        <div class="notice"><strong>Como usar:</strong> escolha uma das 3 opções em cada refeição. Varie frutas, verduras, legumes, grãos e fontes de proteína ao longo da semana. Quantidades específicas dependem de necessidades individuais e nível de atividade.</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="panel-alimentacao" class="panel" role="tabpanel" aria-labelledby="tab-alimentacao">
-      <div class="section-card">
-        <div class="section-head">
-          <h2>Plano de alimentação</h2>
-          <p>Exemplo geral de organização alimentar equilibrada. Não é dieta individualizada e não define calorias, restrições ou metas de peso.</p>
+  <section class="tab-panel" id="tab-exercicios">
+    <div class="section">
+      <h2>Exercícios · 3 vezes por semana</h2>
+      <p class="section-desc">Escolha o ambiente que combina melhor com sua rotina. Os cronogramas usam intensidade leve a moderada e priorizam consistência, técnica e recuperação.</p>
+      <div id="exerciseLocked" class="notice warning show"><strong>Antes de continuar:</strong> gere seu perfil na aba IMC.</div>
+      <div id="exerciseContent" class="locked">
+        <div class="notice" id="exerciseProfile"></div>
+        <div class="subtabs" role="tablist" aria-label="Tipos de exercício">
+          <button class="subtab-btn active" data-subtab="casa" type="button">Em casa</button>
+          <button class="subtab-btn" data-subtab="academia" type="button">Academia</button>
+          <button class="subtab-btn" data-subtab="corrida" type="button">Corrida de rua</button>
         </div>
-
-        <div class="cards">
-          <div class="info-card">
-            <h3>Princípio geral</h3>
-            <p>Priorize variedade: frutas, verduras e legumes, grãos integrais, fontes de proteína, laticínios ou alternativas adequadas e gorduras alimentares em contexto equilibrado.</p>
-          </div>
-          <div class="info-card">
-            <h3>Hidratação</h3>
-            <p>Mantenha água disponível ao longo do dia. Necessidades variam conforme clima, atividade física e condições individuais.</p>
-          </div>
-        </div>
-
-        <div class="meal-list">
-          <div class="meal"><strong>Café da manhã</strong><span>Exemplo: pão ou cereal integral + uma fonte de proteína, como ovo, queijo, iogurte ou alternativa equivalente + fruta.</span></div>
-          <div class="meal"><strong>Almoço</strong><span>Exemplo: arroz ou outro grão + feijão/lentilha + proteína + verduras e legumes variados.</span></div>
-          <div class="meal"><strong>Lanche</strong><span>Exemplo: fruta com iogurte; sanduíche simples; ou outra combinação prática com alimento fonte de proteína e/ou grão.</span></div>
-          <div class="meal"><strong>Jantar</strong><span>Use a mesma lógica do almoço ou uma refeição simples com legumes, fonte de proteína e carboidrato/grão conforme sua rotina.</span></div>
-        </div>
-
-        <div class="notice"><strong>Uso responsável:</strong> alergias, doenças, necessidades nutricionais específicas e mudanças alimentares importantes devem ser discutidas com profissional qualificado e, no caso de menores, também com um responsável.</div>
+        <div class="subtab-panel active" id="sub-casa"><div class="schedule" id="scheduleCasa"></div></div>
+        <div class="subtab-panel" id="sub-academia"><div class="schedule" id="scheduleAcademia"></div></div>
+        <div class="subtab-panel" id="sub-corrida"><div class="schedule" id="scheduleCorrida"></div></div>
+        <div class="notice warning"><strong>Segurança:</strong> pare se houver dor, tontura, falta de ar fora do esperado ou mal-estar. Quem tem condição de saúde, lesão ou está retornando após longo período parado deve buscar orientação profissional antes de progredir.</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="panel-exercicios" class="panel" role="tabpanel" aria-labelledby="tab-exercicios">
-      <div class="section-card">
-        <div class="section-head">
-          <h2>Exercícios para praticar em casa</h2>
-          <p>Rotina geral, sem equipamentos, pensada para movimento leve a moderado. Faça em ritmo confortável e com técnica controlada.</p>
+  <section class="tab-panel" id="tab-meta">
+    <div class="section">
+      <h2>Meta</h2>
+      <p class="section-desc">Acompanhe o ponto de partida e metas de hábitos. O sistema não calcula “peso ideal” nem prazo automático para emagrecimento.</p>
+      <div id="goalLocked" class="notice warning show"><strong>Antes de continuar:</strong> gere seu perfil na aba IMC.</div>
+      <div id="goalContent" class="locked">
+        <div class="goal-grid">
+          <div class="goal-card"><span>Peso informado</span><b id="goalWeight">—</b></div>
+          <div class="goal-card"><span>IMC atual</span><b id="goalBmi">—</b></div>
+          <div class="goal-card"><span>Referência adulta</span><b>18,5 a 24,9</b></div>
+          <div class="goal-card"><span>Prazo estimado</span><b>Não calculado</b></div>
         </div>
-
-        <div class="routine-head">
-          <b>Sessão simples</b>
-          <span>1 a 2 voltas · descanso conforme necessário</span>
+        <div class="notice"><strong>Por que não há previsão em dias/meses?</strong> Uma previsão de mudança de peso depende de histórico clínico, composição corporal, ingestão, gasto energético, medicamentos, sono, nível de atividade e acompanhamento profissional. O site usa metas de processo, não uma promessa de prazo.</div>
+        <h3 style="margin-top:16px">Metas semanais de hábitos</h3>
+        <div class="checklist">
+          <div class="check">✓ Realizar 3 sessões de atividade física na semana.</div>
+          <div class="check">✓ Manter refeições variadas e regulares.</div>
+          <div class="check">✓ Priorizar recuperação, hidratação e sono adequado.</div>
         </div>
-
-        <div class="exercise-list">
-          <div class="exercise"><strong>Aquecimento</strong><span>Marcha leve no lugar e movimentos suaves de braços e ombros por alguns minutos.</span></div>
-          <div class="exercise"><strong>Sentar e levantar</strong><span>Use uma cadeira firme. Faça de 8 a 12 repetições, controlando a descida e a subida.</span></div>
-          <div class="exercise"><strong>Flexão na parede</strong><span>Apoie as mãos na parede e faça de 8 a 12 repetições, mantendo o corpo alinhado.</span></div>
-          <div class="exercise"><strong>Elevação de panturrilha</strong><span>Em pé, com apoio se necessário, eleve os calcanhares e retorne devagar. Faça de 8 a 12 repetições.</span></div>
-          <div class="exercise"><strong>Ponte de quadril</strong><span>Deitado de costas, joelhos dobrados, eleve o quadril suavemente e retorne. Faça de 8 a 12 repetições.</span></div>
-          <div class="exercise"><strong>Mobilidade final</strong><span>Finalize com movimentos leves e confortáveis, sem forçar articulações ou alongamentos dolorosos.</span></div>
-        </div>
-
-        <div class="notice"><strong>Segurança:</strong> interrompa se houver dor, tontura, falta de ar fora do esperado ou mal-estar. Pessoas com condições de saúde, limitações físicas ou recuperação de lesão devem buscar orientação profissional antes de iniciar uma nova rotina.</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="footer">Versão 2026.08.08.4 · Referências gerais: CDC Adult BMI Categories, CDC Healthy Eating Tips e CDC Physical Activity Basics.</footer>
-  </main>
+  <div class="footer">Saúde em Foco · versão 2026.08.08.5 · conteúdo geral para adultos de 20 a 65 anos</div>
+</main>
+<script>
+const html=document.documentElement,themeButton=document.getElementById('themeButton');
+function setTheme(t){html.dataset.theme=t;localStorage.setItem('health-theme',t);themeButton.textContent=t==='light'?'☾ Escuro':'☀ Claro';document.querySelector('meta[name="theme-color"]').content=t==='light'?'#f4f7fb':'#08111f'}
+setTheme(localStorage.getItem('health-theme')||'light');themeButton.onclick=()=>setTheme(html.dataset.theme==='light'?'dark':'light');
 
-  <script>
-    const html = document.documentElement;
-    const themeButton = document.getElementById('themeButton');
-    const themeMeta = document.querySelector('meta[name="theme-color"]');
-    const tabs = [...document.querySelectorAll('.tab')];
-    const panels = [...document.querySelectorAll('.panel')];
+document.querySelectorAll('.tab-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active')});
+document.querySelectorAll('.subtab-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.subtab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.subtab-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('sub-'+b.dataset.subtab).classList.add('active')});
 
-    function aplicarTema(theme){
-      const tema = theme === 'dark' ? 'dark' : 'light';
-      html.dataset.theme = tema;
-      localStorage.setItem('imc-theme', tema);
-      themeButton.textContent = tema === 'light' ? '☾ Escuro' : '☀ Claro';
-      themeMeta.setAttribute('content', tema === 'light' ? '#f4f7fb' : '#0b1220');
-    }
+const idadeEl=document.getElementById('idade'),sexoEl=document.getElementById('sexo'),alturaEl=document.getElementById('altura'),pesoEl=document.getElementById('peso'),erroEl=document.getElementById('erro');let profile=null;
+function num(v){return Number(String(v).trim().replace(',','.'))}function heightCm(v){const n=num(v);return n>0&&n<=3?n*100:n}
+function ageGroup(a){if(a<=25)return'20 a 25';if(a<=30)return'26 a 30';if(a<=35)return'31 a 35';if(a<=40)return'36 a 40';if(a<=45)return'41 a 45';if(a<=50)return'46 a 50';if(a<=55)return'51 a 55';if(a<=60)return'56 a 60';return'61 a 65'}
+function bmiCategory(v){if(v<18.5)return['Abaixo do peso','IMC abaixo de 18,5 na referência adulta.'];if(v<25)return['Peso saudável','IMC entre 18,5 e 24,9 na referência adulta.'];if(v<30)return['Sobrepeso','IMC entre 25,0 e 29,9 na referência adulta.'];if(v<35)return['Obesidade Grau I · Classe 1','IMC entre 30,0 e 34,9.'];if(v<40)return['Obesidade Grau II · Classe 2','IMC entre 35,0 e 39,9.'];return['Obesidade Grau III · Classe 3','IMC igual ou superior a 40,0.']}
 
-    aplicarTema(localStorage.getItem('imc-theme') || 'light');
-    themeButton.addEventListener('click',()=>aplicarTema(html.dataset.theme === 'light' ? 'dark' : 'light'));
+const meals={
+ breakfast:['Iogurte natural + fruta + aveia','Pão integral + queijo + fruta','Ovos mexidos + pão integral + fruta','Mingau de aveia com leite + banana','Tapioca com ovo + fruta','Iogurte + granola simples + fruta','Sanduíche integral com queijo + fruta','Vitamina de fruta com leite + aveia','Cuscuz + ovo + fruta'],
+ lunch:['Arroz + feijão + legumes + frango','Arroz integral + lentilha + salada + peixe','Macarrão + legumes + carne magra','Batata assada + feijão + salada + frango','Quinoa + lentilha + legumes + ovo','Arroz + feijão + verduras + peixe','Purê de batata + legumes + frango','Arroz integral + feijão + salada + ovo','Macarrão integral + molho de tomate + legumes + frango'],
+ snack:['Fruta + iogurte','Sanduíche integral com queijo','Fruta + castanhas','Iogurte + aveia','Pão integral + ricota','Vitamina de fruta com leite','Fruta + queijo','Iogurte + fruta picada','Torrada integral + pasta de grão-de-bico'],
+ dinner:['Sopa de legumes + proteína','Arroz + feijão + legumes + ovo','Omelete com legumes + acompanhamento integral','Sanduíche integral com frango + salada','Batata + legumes + peixe','Arroz integral + lentilha + verduras','Macarrão com legumes + proteína','Creme de legumes + ovo + pão integral','Cuscuz + ovo + legumes']
+};
+const days=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
+function pick3(arr,start){return[0,1,2].map(i=>arr[(start+i)%arr.length])}
+function mealHtml(name,items){return`<div class="meal"><b>${name}</b><ol>${items.map(x=>`<li>${x}</li>`).join('')}</ol></div>`}
+function renderMeals(){const seed=(profile.age+(profile.sex==='feminino'?5:11)+Math.round(profile.bmi*10)+Math.round(profile.height)+Math.round(profile.weight))%meals.breakfast.length;document.getElementById('mealWeek').innerHTML=days.map((d,i)=>{const s=(seed+i*2)%9;return`<article class="day-card"><h4>${d}</h4>${mealHtml('Café da manhã',pick3(meals.breakfast,s))}${mealHtml('Almoço',pick3(meals.lunch,s+1))}${mealHtml('Café da tarde',pick3(meals.snack,s+2))}${mealHtml('Jantar',pick3(meals.dinner,s+3))}</article>`}).join('');document.getElementById('foodProfile').innerHTML=`<strong>Perfil:</strong> ${profile.sexLabel}, ${profile.group} anos, IMC ${profile.bmi.toFixed(1).replace('.',',')}. As opções são rotacionadas conforme o perfil; porções e calorias não são calculadas automaticamente.`}
 
-    function ativarAba(target){
-      tabs.forEach(tab=>tab.setAttribute('aria-selected',String(tab.dataset.target===target)));
-      panels.forEach(panel=>panel.classList.toggle('active',panel.id===target));
-      history.replaceState(null,'','#'+target.replace('panel-',''));
-    }
+const ex={
+ casa:[['Segunda · Corpo inteiro',['5–8 min de aquecimento leve','Sentar e levantar da cadeira · 2 séries confortáveis','Flexão na parede · 2 séries confortáveis','Ponte de quadril · 2 séries confortáveis','Mobilidade leve para finalizar']],['Quarta · Mobilidade + força',['Caminhada leve no lugar','Agachamento com apoio de cadeira','Bird-dog alternado','Elevação de panturrilha com apoio','Alongamentos suaves sem forçar']],['Sexta · Corpo inteiro',['Aquecimento leve','Subida em degrau baixo ou marcha estacionária','Remada com elástico, se disponível','Ponte de quadril','Mobilidade e respiração tranquila']]],
+ academia:[['Segunda · Full body A',['5–10 min de aquecimento leve','Leg press ou agachamento guiado','Puxada frontal','Supino em máquina','Exercícios de core com técnica confortável']],['Quarta · Full body B',['Aquecimento leve','Cadeira extensora ou movimento equivalente','Remada sentada','Desenvolvimento em máquina leve','Panturrilhas + mobilidade']],['Sexta · Full body C',['Aquecimento leve','Movimento de quadril guiado','Puxada ou remada','Empurrar em máquina','Finalização aeróbica leve a moderada']]],
+ corrida:[['Segunda · Caminhar + trotar',['5 min de caminhada leve','Alternar caminhada rápida e trote confortável por cerca de 20 min','Manter ritmo em que seja possível conversar','5 min de caminhada para desacelerar']],['Quarta · Sessão leve',['Caminhada inicial','Trote leve ou caminhada rápida por 20–25 min','Sem buscar velocidade máxima','Desacelerar gradualmente']],['Sexta · Caminhar + trotar',['5 min de caminhada','Alternar blocos confortáveis de caminhada e trote','Total aproximado de 20–30 min conforme tolerância','Finalizar caminhando lentamente']]]
+};
+function sessionsHtml(list){return list.map(x=>`<article class="session"><div class="day">${x[0].split(' · ')[0]}</div><h4>${x[0].split(' · ')[1]}</h4><ul>${x[1].map(i=>`<li>${i}</li>`).join('')}</ul></article>`).join('')}
+function renderExercises(){document.getElementById('scheduleCasa').innerHTML=sessionsHtml(ex.casa);document.getElementById('scheduleAcademia').innerHTML=sessionsHtml(ex.academia);document.getElementById('scheduleCorrida').innerHTML=sessionsHtml(ex.corrida);document.getElementById('exerciseProfile').innerHTML=`<strong>Perfil:</strong> ${profile.sexLabel}, ${profile.group} anos, IMC ${profile.bmi.toFixed(1).replace('.',',')}. O cronograma permanece moderado; idade, sexo ou IMC não são usados para impor intensidade maior.`}
+function unlock(){['foodLocked','exerciseLocked','goalLocked'].forEach(id=>document.getElementById(id).classList.remove('show'));['foodContent','exerciseContent','goalContent'].forEach(id=>document.getElementById(id).classList.add('show'));renderMeals();renderExercises();document.getElementById('goalWeight').textContent=profile.weight.toFixed(1).replace('.',',')+' kg';document.getElementById('goalBmi').textContent=profile.bmi.toFixed(1).replace('.',',')}
 
-    tabs.forEach(tab=>tab.addEventListener('click',()=>ativarAba(tab.dataset.target)));
-    const abaInicial = location.hash ? 'panel-'+location.hash.slice(1) : 'panel-imc';
-    if(document.getElementById(abaInicial)) ativarAba(abaInicial);
-
-    const form = document.getElementById('imcForm');
-    const alturaEl = document.getElementById('altura');
-    const pesoEl = document.getElementById('peso');
-    const erroEl = document.getElementById('erro');
-    const resultadoEl = document.getElementById('resultado');
-    const valorImcEl = document.getElementById('valorImc');
-    const categoriaEl = document.getElementById('categoria');
-    const descricaoEl = document.getElementById('descricao');
-    const personDataEl = document.getElementById('personData');
-
-    function numero(valor){return Number(String(valor).trim().replace(',','.'))}
-    function alturaEmCm(valor){const n=numero(valor);return Number.isFinite(n)&&n>0&&n<=3?n*100:n}
-    function categoriaAdulto(imc){
-      if(imc<18.5)return['Abaixo do peso','IMC abaixo de 18,5 na classificação adulta.'];
-      if(imc<25)return['Peso saudável','IMC entre 18,5 e 24,9 na classificação adulta.'];
-      if(imc<30)return['Sobrepeso','IMC entre 25,0 e 29,9 na classificação adulta.'];
-      if(imc<35)return['Obesidade Grau I · Classe 1','IMC entre 30,0 e 34,9.'];
-      if(imc<40)return['Obesidade Grau II · Classe 2','IMC entre 35,0 e 39,9.'];
-      return['Obesidade Grau III · Classe 3','IMC igual ou superior a 40,0.'];
-    }
-
-    function calcular(){
-      const alturaCm=alturaEmCm(alturaEl.value);
-      const pesoKg=numero(pesoEl.value);
-      erroEl.textContent='';
-      if(!Number.isFinite(alturaCm)||!Number.isFinite(pesoKg)||alturaCm<=0||pesoKg<=0){
-        erroEl.textContent='Informe altura e peso com valores numéricos maiores que zero.';
-        resultadoEl.classList.remove('show');return;
-      }
-      if(alturaCm<50||alturaCm>260){
-        erroEl.textContent='Confira a altura. Exemplos aceitos: 183, 1.83 ou 1,83.';
-        resultadoEl.classList.remove('show');return;
-      }
-      if(pesoKg<10||pesoKg>500){
-        erroEl.textContent='Confira o peso informado em quilogramas.';
-        resultadoEl.classList.remove('show');return;
-      }
-      const imc=pesoKg/((alturaCm/100)**2);
-      const [categoria,descricao]=categoriaAdulto(imc);
-      valorImcEl.textContent=imc.toFixed(1).replace('.',',');
-      categoriaEl.textContent=categoria;
-      descricaoEl.textContent=descricao;
-      personDataEl.innerHTML=`<span class="chip">Altura: ${alturaCm.toFixed(1).replace('.',',')} cm</span><span class="chip">Peso: ${pesoKg.toFixed(1).replace('.',',')} kg</span>`;
-      resultadoEl.classList.add('show');
-      resultadoEl.scrollIntoView({behavior:'smooth',block:'nearest'});
-    }
-
-    form.addEventListener('submit',e=>{e.preventDefault();calcular()});
-    document.getElementById('limpar').addEventListener('click',()=>{
-      form.reset();erroEl.textContent='';resultadoEl.classList.remove('show');personDataEl.innerHTML='';alturaEl.focus();
-    });
-  </script>
+document.getElementById('profileForm').onsubmit=e=>{e.preventDefault();erroEl.textContent='';const age=Number(idadeEl.value),sex=sexoEl.value,h=heightCm(alturaEl.value),w=num(pesoEl.value);if(!Number.isInteger(age)||age<20||age>65){erroEl.textContent='Informe uma idade inteira entre 20 e 65 anos.';return}if(!sex){erroEl.textContent='Selecione o sexo.';return}if(!Number.isFinite(h)||h<120||h>230){erroEl.textContent='Confira a altura. Exemplos: 183, 1.83 ou 1,83.';return}if(!Number.isFinite(w)||w<30||w>300){erroEl.textContent='Confira o peso informado em quilogramas.';return}const bmi=w/((h/100)**2),cat=bmiCategory(bmi);profile={age,sex,sexLabel:sex==='feminino'?'Feminino':'Masculino',group:ageGroup(age),height:h,weight:w,bmi};document.getElementById('valorImc').textContent=bmi.toFixed(1).replace('.',',');document.getElementById('categoria').textContent=cat[0];document.getElementById('descricao').textContent=cat[1];document.getElementById('profileBadge').textContent=`${profile.sexLabel} · ${profile.age} anos · faixa ${profile.group} · ${h.toFixed(1).replace('.',',')} cm · ${w.toFixed(1).replace('.',',')} kg`;document.getElementById('resultado').classList.add('show');unlock()};
+document.getElementById('limpar').onclick=()=>{document.getElementById('profileForm').reset();profile=null;erroEl.textContent='';document.getElementById('resultado').classList.remove('show');['foodLocked','exerciseLocked','goalLocked'].forEach(id=>document.getElementById(id).classList.add('show'));['foodContent','exerciseContent','goalContent'].forEach(id=>document.getElementById(id).classList.remove('show'));alturaEl.focus()};
+</script>
 </body>
 </html>
