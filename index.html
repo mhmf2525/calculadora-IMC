@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#070b12" />
-  <meta name="description" content="Calculadora de IMC responsiva com idade, sexo, tema claro e escuro." />
+  <meta name="description" content="Calculadora de IMC responsiva com tema claro e escuro." />
   <title>Calculadora de IMC</title>
   <style>
     :root{
@@ -17,7 +17,6 @@
       --muted:#64748b;
       --bright:#f1f5f9;
       --blue:#38bdf8;
-      --green:#4ade80;
       --yellow:#fbbf24;
       --red:#f87171;
       --purple:#a78bfa;
@@ -33,7 +32,6 @@
       --muted:#64748b;
       --bright:#0f172a;
       --blue:#0284c7;
-      --green:#15803d;
       --yellow:#b45309;
       --red:#dc2626;
       --purple:#7c3aed;
@@ -42,7 +40,7 @@
     *{box-sizing:border-box}
     html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:"Courier New",monospace}
     body{padding:18px 10px 34px;transition:background .2s,color .2s}
-    button,input,select{font:inherit}
+    button,input{font:inherit}
     button{cursor:pointer;-webkit-tap-highlight-color:transparent}
     .app{width:min(100%,820px);margin:0 auto}
     .topline{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -55,14 +53,12 @@
     .hero strong{display:block;color:var(--blue);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase}
     .hero span{display:block;margin-top:5px;color:var(--bright);font-size:.9rem;font-weight:900}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
     .card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:14px;box-shadow:var(--shadow)}
     .field{display:flex;flex-direction:column;gap:7px}
     .field label{color:var(--muted);font-size:.58rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
     .input-wrap{display:flex;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:7px;overflow:hidden}
     .input-wrap:focus-within{border-color:color-mix(in srgb,var(--blue) 70%,var(--line));box-shadow:0 0 0 2px color-mix(in srgb,var(--blue) 12%,transparent)}
-    .input-wrap input,.input-wrap select{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--bright);padding:13px;font-size:1rem}
-    .input-wrap select{appearance:auto}
+    .input-wrap input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--bright);padding:13px;font-size:1rem}
     .unit{padding:0 12px;color:var(--blue);font-size:.65rem;font-weight:900;white-space:nowrap}
     .helper{color:var(--muted);font-size:.52rem;line-height:1.45}
     .actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}
@@ -103,12 +99,12 @@
       body{padding:12px 7px 28px}
       .topline{align-items:center}
       .theme-button{padding:9px;font-size:.56rem}
-      .grid,.grid.three{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
       .actions{grid-template-columns:1fr}
       .category{text-align:left;max-width:none}
       .card{padding:12px}
       .primary,.secondary{min-height:46px}
-      .input-wrap input,.input-wrap select{min-height:48px;font-size:1rem}
+      .input-wrap input{min-height:48px;font-size:1rem}
     }
   </style>
 </head>
@@ -122,7 +118,7 @@
         </div>
         <button id="themeButton" class="theme-button" type="button" aria-label="Alternar tema">☀ Claro</button>
       </div>
-      <p class="subtitle">Informe idade, sexo, altura e peso. A altura aceita centímetros ou metros: por exemplo, 183, 1.83 ou 1,83.</p>
+      <p class="subtitle">Informe altura e peso. A altura aceita centímetros ou metros: por exemplo, 183, 1.83 ou 1,83.</p>
     </header>
 
     <section class="hero" aria-label="Descrição da calculadora">
@@ -151,29 +147,6 @@
         </div>
       </div>
 
-      <div class="grid">
-        <div class="card field">
-          <label for="idade">Idade</label>
-          <div class="input-wrap">
-            <input id="idade" name="idade" type="number" inputmode="numeric" min="2" max="120" step="1" placeholder="Ex.: 35" aria-describedby="erro" />
-            <span class="unit">anos</span>
-          </div>
-          <div class="helper">A classificação adulta é usada a partir dos 20 anos.</div>
-        </div>
-
-        <div class="card field">
-          <label for="sexo">Sexo</label>
-          <div class="input-wrap">
-            <select id="sexo" name="sexo" aria-describedby="erro">
-              <option value="">Selecione</option>
-              <option value="masculino">Masculino</option>
-              <option value="feminino">Feminino</option>
-            </select>
-          </div>
-          <div class="helper">Para 2–19 anos, idade e sexo são necessários para interpretar o IMC por percentil.</div>
-        </div>
-      </div>
-
       <div id="erro" class="error" role="alert" aria-live="polite"></div>
 
       <div class="actions">
@@ -183,7 +156,7 @@
     </form>
 
     <section id="resultado" class="result" aria-live="polite">
-      <div class="result-label">Resultado calculado</div>
+      <div class="result-label">Resultado calculado · referência adulta</div>
       <div class="result-main">
         <div class="imc"><span id="valorImc">--</span> <small>kg/m²</small></div>
         <div class="category">
@@ -194,8 +167,8 @@
       <div class="person-data" id="personData"></div>
     </section>
 
-    <div id="avisoJovem" class="note warning" hidden>
-      <strong>Interpretação para 2 a 19 anos:</strong> o IMC numérico foi calculado, mas a categoria correta depende do percentil de IMC por idade e sexo. Esta versão não aplica automaticamente a classificação adulta a crianças e adolescentes.
+    <div class="note warning">
+      <strong>Referência:</strong> a classificação apresentada abaixo é destinada a adultos com 20 anos ou mais. Para crianças e adolescentes, o IMC deve ser interpretado por idade e sexo usando curvas específicas.
     </div>
 
     <div class="section-title">Referência para adultos · 20 anos ou mais</div>
@@ -214,10 +187,10 @@
     </div>
 
     <div class="note">
-      <strong>Importante:</strong> o IMC é uma medida de triagem e não diagnostica, sozinho, o estado de saúde. Histórico de saúde, composição corporal, exames e outros fatores podem ser relevantes em uma avaliação individual.
+      <strong>Importante:</strong> o IMC é uma medida de triagem e não diagnostica, sozinho, o estado de saúde. Outros fatores podem ser relevantes em uma avaliação individual.
     </div>
 
-    <footer class="footer">Calculadora responsiva · tema claro/escuro · HTML, CSS e JavaScript puro · preparada para GitHub Pages.</footer>
+    <footer class="footer">Calculadora responsiva · tema claro/escuro · versão 2026.08.08.2</footer>
   </main>
 
   <script>
@@ -227,14 +200,11 @@
     const form = document.getElementById('imcForm');
     const alturaEl = document.getElementById('altura');
     const pesoEl = document.getElementById('peso');
-    const idadeEl = document.getElementById('idade');
-    const sexoEl = document.getElementById('sexo');
     const erroEl = document.getElementById('erro');
     const resultadoEl = document.getElementById('resultado');
     const valorImcEl = document.getElementById('valorImc');
     const categoriaEl = document.getElementById('categoria');
     const descricaoEl = document.getElementById('descricao');
-    const avisoJovemEl = document.getElementById('avisoJovem');
     const personDataEl = document.getElementById('personData');
 
     function aplicarTema(theme){
@@ -270,14 +240,12 @@
       if(imc < 30) return ['Sobrepeso', 'IMC entre 25,0 e 29,9 na classificação adulta.'];
       if(imc < 35) return ['Obesidade Grau I · Classe 1', 'IMC entre 30,0 e 34,9. Corresponde à Classe 1 de obesidade em adultos.'];
       if(imc < 40) return ['Obesidade Grau II · Classe 2', 'IMC entre 35,0 e 39,9. Corresponde à Classe 2 de obesidade em adultos.'];
-      return ['Obesidade Grau III · Classe 3', 'IMC igual ou superior a 40,0. Corresponde à Classe 3, também chamada de obesidade severa.'];
+      return ['Obesidade Grau III · Classe 3', 'IMC igual ou superior a 40,0. Corresponde à Classe 3 de obesidade em adultos.'];
     }
 
     function calcular(){
       const alturaCm = alturaEmCm(alturaEl.value);
       const pesoKg = numero(pesoEl.value);
-      const idade = Number(idadeEl.value);
-      const sexo = sexoEl.value;
       erroEl.textContent = '';
 
       if(!Number.isFinite(alturaCm) || !Number.isFinite(pesoKg) || alturaCm <= 0 || pesoKg <= 0){
@@ -298,38 +266,14 @@
         return;
       }
 
-      if(!Number.isInteger(idade) || idade < 2 || idade > 120){
-        erroEl.textContent = 'Informe uma idade inteira entre 2 e 120 anos.';
-        resultadoEl.classList.remove('show');
-        return;
-      }
-
-      if(!sexo){
-        erroEl.textContent = 'Selecione o sexo.';
-        resultadoEl.classList.remove('show');
-        return;
-      }
-
       const alturaM = alturaCm / 100;
       const imc = pesoKg / (alturaM * alturaM);
+      const [categoria, descricao] = categoriaAdulto(imc);
+
       valorImcEl.textContent = imc.toFixed(1).replace('.', ',');
-
-      const jovem = idade < 20;
-      avisoJovemEl.hidden = !jovem;
-
-      if(jovem){
-        categoriaEl.textContent = 'IMC por idade necessário';
-        descricaoEl.textContent = 'Para 2–19 anos, a categoria depende do percentil de IMC específico para idade e sexo; a classificação adulta não foi aplicada.';
-      }else{
-        const [categoria, descricao] = categoriaAdulto(imc);
-        categoriaEl.textContent = categoria;
-        descricaoEl.textContent = descricao;
-      }
-
-      const sexoTexto = sexo === 'masculino' ? 'Masculino' : 'Feminino';
+      categoriaEl.textContent = categoria;
+      descricaoEl.textContent = descricao;
       personDataEl.innerHTML = `
-        <span class="chip">Idade: ${idade} anos</span>
-        <span class="chip">Sexo: ${sexoTexto}</span>
         <span class="chip">Altura: ${alturaCm.toFixed(1).replace('.', ',')} cm</span>
         <span class="chip">Peso: ${pesoKg.toFixed(1).replace('.', ',')} kg</span>
       `;
@@ -347,7 +291,6 @@
       form.reset();
       erroEl.textContent = '';
       resultadoEl.classList.remove('show');
-      avisoJovemEl.hidden = true;
       personDataEl.innerHTML = '';
       alturaEl.focus();
     });
