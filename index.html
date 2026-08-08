@@ -9,9 +9,12 @@
 <style>
 :root{color-scheme:light;--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--line:#dbe4ee;--text:#334155;--muted:#64748b;--bright:#0f172a;--brand:#2563eb;--brand2:#1d4ed8;--green:#15803d;--yellow:#b45309;--red:#dc2626;--purple:#7c3aed;--shadow:0 16px 40px rgba(15,23,42,.08)}
 html[data-theme="dark"]{color-scheme:dark;--bg:#08111f;--panel:#0f1b2d;--panel2:#0b1626;--line:#24344a;--text:#cbd5e1;--muted:#7f8da3;--bright:#f8fafc;--brand:#60a5fa;--brand2:#93c5fd;--green:#4ade80;--yellow:#fbbf24;--red:#f87171;--purple:#c4b5fd;--shadow:0 16px 40px rgba(0,0,0,.24)}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body{padding:18px 12px 36px;transition:.2s}button,input,select{font:inherit}button{cursor:pointer}.app{width:min(100%,1080px);margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:10px}.brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand),#0ea5e9);display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--shadow)}.brand b{display:block;color:var(--bright);font-size:1rem}.brand span{display:block;color:var(--muted);font-size:.76rem;margin-top:2px}.theme{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:9px 12px;font-weight:700}.hero{background:linear-gradient(135deg,color-mix(in srgb,var(--brand) 13%,var(--panel)),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:14px}.hero h1{margin:0;color:var(--bright);font-size:clamp(1.65rem,4vw,2.35rem)}.hero p{margin:8px 0 0;color:var(--muted);line-height:1.55;max-width:780px}.tabs{display:flex;gap:7px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:thin}.tab-btn,.subtab-btn{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 14px;font-weight:800}.tab-btn.active,.subtab-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}.tab-panel{display:none}.tab-panel.active{display:block}.section{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:12px}.section h2,.section h3{color:var(--bright);margin:0}.section h2{font-size:1.2rem}.section h3{font-size:1rem}.section-desc{color:var(--muted);font-size:.86rem;line-height:1.55;margin:6px 0 0}.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:.75rem;font-weight:800;color:var(--text)}.input-wrap{display:flex;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:10px;overflow:hidden}.input-wrap:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 12%,transparent)}.input-wrap input,.input-wrap select{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--bright);padding:12px}.unit{padding:0 10px;color:var(--brand);font-weight:800;font-size:.72rem}.helper{font-size:.68rem;color:var(--muted)}.actions{display:flex;gap:8px;margin-top:14px}.primary,.secondary{border-radius:10px;padding:11px 16px;font-weight:800}.primary{border:1px solid var(--brand);background:var(--brand);color:#fff}.secondary{border:1px solid var(--line);background:var(--panel);color:var(--text)}.error{min-height:18px;color:var(--red);font-size:.76rem;margin-top:8px}.result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.metric{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.metric span{display:block;color:var(--muted);font-size:.72rem}.metric b{display:block;color:var(--bright);font-size:1.18rem;margin-top:4px}.result-box{display:none;margin-top:14px;border:1px solid color-mix(in srgb,var(--brand) 35%,var(--line));background:color-mix(in srgb,var(--brand) 6%,var(--panel));border-radius:14px;padding:16px}.result-box.show{display:block}.result-main{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap}.imc-value{font-size:2.7rem;font-weight:900;color:var(--brand);line-height:1}.imc-value small{font-size:.75rem;color:var(--muted)}.category{text-align:right}.category b{display:block;color:var(--bright)}.category span{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}.profile-badge{margin-top:10px;color:var(--muted);font-size:.75rem}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:14px}table{width:100%;border-collapse:collapse;min-width:640px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:.78rem}th{background:var(--panel2);color:var(--muted);font-size:.7rem}tr:last-child td{border-bottom:0}.notice{border-left:4px solid var(--brand);background:var(--panel2);border-radius:10px;padding:11px 13px;color:var(--text);font-size:.78rem;line-height:1.55;margin-top:12px}.notice.warning{border-left-color:var(--yellow)}.notice strong{color:var(--bright)}.locked{display:none}.locked.show{display:block}.subtabs{display:flex;gap:7px;overflow-x:auto;margin:14px 0 12px}.subtab-panel{display:none}.subtab-panel.active{display:block}.week-grid{display:grid;grid-template-columns:repeat(7,minmax(190px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px}.day-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:190px}.day-card h4{margin:0 0 10px;color:var(--bright)}.meal{border-top:1px solid var(--line);padding:9px 0}.meal:first-of-type{border-top:0;padding-top:0}.meal b{display:block;color:var(--brand);font-size:.74rem;margin-bottom:5px}.meal ol{margin:0;padding-left:17px}.meal li{font-size:.72rem;color:var(--text);line-height:1.45;margin:3px 0}.schedule{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.session{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.session .day{color:var(--brand);font-size:.72rem;font-weight:900;text-transform:uppercase}.session h4{margin:5px 0;color:var(--bright)}.session ul{margin:8px 0 0;padding-left:18px}.session li{font-size:.78rem;line-height:1.5;margin:5px 0}.goal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.goal-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.goal-card span{display:block;color:var(--muted);font-size:.72rem}.goal-card b{display:block;color:var(--bright);margin-top:5px;font-size:1.05rem}.checklist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.check{border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:10px;font-size:.78rem;color:var(--text)}.footer{margin-top:18px;text-align:center;color:var(--muted);font-size:.7rem}.ob1{color:var(--yellow)}.ob2{color:#f97316}.ob3{color:var(--red)}
-@media(max-width:900px){.form-grid,.result-grid,.goal-grid{grid-template-columns:repeat(2,1fr)}.schedule{grid-template-columns:1fr}.checklist{grid-template-columns:1fr}}
-@media(max-width:600px){body{padding:10px 7px 28px}.topbar{align-items:flex-start}.brand span{display:none}.hero{padding:16px}.form-grid,.result-grid,.goal-grid{grid-template-columns:1fr}.actions{display:grid;grid-template-columns:1fr}.tab-btn,.subtab-btn{padding:9px 11px;font-size:.78rem}.section{padding:14px}.result-main{align-items:flex-start}.category{text-align:left}.week-grid{grid-template-columns:repeat(7,82vw)}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body{padding:18px 12px 36px;transition:.2s}button,input,select{font:inherit}button{cursor:pointer}.app{width:min(100%,1120px);margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:10px}.brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--brand),#0ea5e9);display:grid;place-items:center;color:#fff;font-weight:900;box-shadow:var(--shadow)}.brand b{display:block;color:var(--bright);font-size:1rem}.brand span{display:block;color:var(--muted);font-size:.76rem;margin-top:2px}.theme{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:9px 12px;font-weight:700}.hero{background:linear-gradient(135deg,color-mix(in srgb,var(--brand) 13%,var(--panel)),var(--panel));border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow);margin-bottom:14px}.hero h1{margin:0;color:var(--bright);font-size:clamp(1.65rem,4vw,2.35rem)}.hero p{margin:8px 0 0;color:var(--muted);line-height:1.55;max-width:800px}.tabs,.subtabs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:thin}.tabs{padding:4px 0 10px}.subtabs{margin:14px 0 12px;padding-bottom:3px}.tab-btn,.subtab-btn{white-space:nowrap;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:10px 14px;font-weight:800}.tab-btn.active,.subtab-btn.active{background:var(--brand);color:#fff;border-color:var(--brand)}.tab-panel,.subtab-panel{display:none}.tab-panel.active,.subtab-panel.active{display:block}.section{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);margin-bottom:12px}.section h2,.section h3{color:var(--bright);margin:0}.section h2{font-size:1.2rem}.section h3{font-size:1rem}.section-desc{color:var(--muted);font-size:.86rem;line-height:1.55;margin:6px 0 0}.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:.75rem;font-weight:800;color:var(--text)}.input-wrap{display:flex;align-items:center;border:1px solid var(--line);background:var(--panel2);border-radius:10px;overflow:hidden}.input-wrap:focus-within{border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 12%,transparent)}.input-wrap input,.input-wrap select{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--bright);padding:12px}.unit{padding:0 10px;color:var(--brand);font-weight:800;font-size:.72rem}.helper{font-size:.68rem;color:var(--muted)}.actions{display:flex;gap:8px;margin-top:14px}.primary,.secondary{border-radius:10px;padding:11px 16px;font-weight:800}.primary{border:1px solid var(--brand);background:var(--brand);color:#fff}.secondary{border:1px solid var(--line);background:var(--panel);color:var(--text)}.error{min-height:18px;color:var(--red);font-size:.76rem;margin-top:8px}.result-box{display:none;margin-top:14px;border:1px solid color-mix(in srgb,var(--brand) 35%,var(--line));background:color-mix(in srgb,var(--brand) 6%,var(--panel));border-radius:14px;padding:16px}.result-box.show{display:block}.result-main{display:flex;justify-content:space-between;gap:16px;align-items:end;flex-wrap:wrap}.imc-value{font-size:2.7rem;font-weight:900;color:var(--brand);line-height:1}.imc-value small{font-size:.75rem;color:var(--muted)}.category{text-align:right}.category b{display:block;color:var(--bright)}.category span{display:block;color:var(--muted);font-size:.78rem;margin-top:4px}.profile-badge{margin-top:10px;color:var(--muted);font-size:.75rem}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:14px}table{width:100%;border-collapse:collapse;min-width:640px}th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:.78rem}th{background:var(--panel2);color:var(--muted);font-size:.7rem}tr:last-child td{border-bottom:0}.notice{border-left:4px solid var(--brand);background:var(--panel2);border-radius:10px;padding:11px 13px;color:var(--text);font-size:.78rem;line-height:1.55;margin-top:12px}.notice.warning{border-left-color:var(--yellow)}.notice strong{color:var(--bright)}.locked{border:1px dashed var(--line);border-radius:12px;padding:14px;color:var(--muted);background:var(--panel2)}
+.profile-strip{display:none;gap:8px;flex-wrap:wrap;margin-top:12px}.profile-strip.show{display:flex}.chip{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:6px 9px;font-size:.72rem;color:var(--text)}
+.meal-day-wrap{display:none}.meal-day-wrap.show{display:block}.meal-section{margin-top:16px}.meal-section-title{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-bottom:9px}.meal-section-title h3{font-size:1rem}.meal-section-title span{font-size:.72rem;color:var(--muted)}.meal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.meal-card{border:1px solid var(--line);background:var(--panel2);border-radius:14px;overflow:hidden;min-width:0}.meal-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:linear-gradient(135deg,#dbeafe,#eff6ff)}.meal-card-body{padding:12px}.meal-card .option{display:inline-block;color:var(--brand);font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.meal-card h4{margin:5px 0 5px;color:var(--bright);font-size:.92rem;line-height:1.25}.meal-card p{margin:0;color:var(--muted);font-size:.76rem;line-height:1.5}.meal-legend{margin-top:10px;color:var(--muted);font-size:.72rem}
+.schedule{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.session{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.session .day{color:var(--brand);font-size:.72rem;font-weight:900;text-transform:uppercase}.session h4{margin:5px 0;color:var(--bright)}.session ul{margin:8px 0 0;padding-left:18px}.session li{font-size:.78rem;line-height:1.5;margin:5px 0}.goal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.goal-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}.goal-card span{display:block;color:var(--muted);font-size:.72rem}.goal-card b{display:block;color:var(--bright);margin-top:5px;font-size:1.05rem}.checklist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.check{border:1px solid var(--line);background:var(--panel2);border-radius:10px;padding:10px;font-size:.78rem;color:var(--text)}.footer{margin-top:18px;text-align:center;color:var(--muted);font-size:.7rem}.ob1{color:var(--yellow)}.ob2{color:#f97316}.ob3{color:var(--red)}
+@media(max-width:900px){.form-grid,.goal-grid{grid-template-columns:repeat(2,1fr)}.meal-grid{grid-template-columns:1fr 1fr}.schedule{grid-template-columns:1fr}.checklist{grid-template-columns:1fr}}
+@media(max-width:600px){body{padding:10px 7px 28px}.topbar{align-items:flex-start}.brand span{display:none}.hero{padding:16px}.form-grid,.goal-grid,.meal-grid{grid-template-columns:1fr}.actions{display:grid;grid-template-columns:1fr}.tab-btn,.subtab-btn{padding:9px 11px;font-size:.78rem}.section{padding:14px}.result-main{align-items:flex-start}.category{text-align:left}.meal-card img{aspect-ratio:16/8.5}}
 </style>
 </head>
 <body>
@@ -47,10 +50,7 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#08111f;--panel:#0f1b2d;--panel2:
         <div id="erro" class="error" role="alert" aria-live="polite"></div>
         <div class="actions"><button class="primary" type="submit">Calcular e gerar plano</button><button class="secondary" id="limpar" type="button">Limpar</button></div>
       </form>
-
-      <div id="resultado" class="result-box">
-        <div class="result-main"><div><div class="imc-value"><span id="valorImc">--</span> <small>kg/m²</small></div><div class="profile-badge" id="profileBadge"></div></div><div class="category"><b id="categoria">—</b><span id="descricao">—</span></div></div>
-      </div>
+      <div id="resultado" class="result-box"><div class="result-main"><div><div class="imc-value"><span id="valorImc">--</span> <small>kg/m²</small></div><div class="profile-badge" id="profileBadge"></div></div><div class="category"><b id="categoria">—</b><span id="descricao">—</span></div></div></div>
     </div>
 
     <div class="section">
@@ -69,13 +69,14 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#08111f;--panel:#0f1b2d;--panel2:
 
   <section class="tab-panel" id="tab-alimentacao">
     <div class="section">
-      <h2>Plano de alimentação semanal</h2>
-      <p class="section-desc">Cronograma com 3 opções por refeição, de segunda a domingo. As opções são organizadas a partir do perfil informado, mas não prescrevem calorias nem porções individuais.</p>
-      <div id="foodLocked" class="notice warning show"><strong>Antes de continuar:</strong> preencha Idade, Sexo, Altura e Peso na aba IMC e clique em “Calcular e gerar plano”.</div>
-      <div id="foodContent" class="locked">
-        <div class="notice" id="foodProfile"></div>
-        <div class="week-grid" id="mealWeek"></div>
-        <div class="notice"><strong>Como usar:</strong> escolha uma das 3 opções em cada refeição. Varie frutas, verduras, legumes, grãos e fontes de proteína ao longo da semana. Quantidades específicas dependem de necessidades individuais e nível de atividade.</div>
+      <h2>Plano de Alimentação</h2>
+      <p class="section-desc">Sugestões gerais e não restritivas organizadas por dia. Cada refeição apresenta três opções e uma ilustração do prato. O perfil informado organiza a sequência das opções, mas não substitui uma avaliação nutricional.</p>
+      <div id="mealLocked" class="locked">Preencha Idade, Sexo, Altura e Peso na aba IMC e clique em <strong>Calcular e gerar plano</strong>.</div>
+      <div id="mealPlan" class="meal-day-wrap">
+        <div id="mealProfile" class="profile-strip"></div>
+        <div class="subtabs" id="mealDayTabs" role="tablist" aria-label="Dias da semana"></div>
+        <div id="mealDayContent"></div>
+        <div class="meal-legend">As imagens são ilustrações geradas localmente para identificar visualmente cada opção. As sugestões não incluem contagem de calorias nem porções individualizadas.</div>
       </div>
     </div>
   </section>
@@ -83,83 +84,137 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#08111f;--panel:#0f1b2d;--panel2:
   <section class="tab-panel" id="tab-exercicios">
     <div class="section">
       <h2>Exercícios · 3 vezes por semana</h2>
-      <p class="section-desc">Escolha o ambiente que combina melhor com sua rotina. Os cronogramas usam intensidade leve a moderada e priorizam consistência, técnica e recuperação.</p>
-      <div id="exerciseLocked" class="notice warning show"><strong>Antes de continuar:</strong> gere seu perfil na aba IMC.</div>
-      <div id="exerciseContent" class="locked">
-        <div class="notice" id="exerciseProfile"></div>
-        <div class="subtabs" role="tablist" aria-label="Tipos de exercício">
-          <button class="subtab-btn active" data-subtab="casa" type="button">Em casa</button>
-          <button class="subtab-btn" data-subtab="academia" type="button">Academia</button>
-          <button class="subtab-btn" data-subtab="corrida" type="button">Corrida de rua</button>
+      <p class="section-desc">Escolha o ambiente. A rotina é geral e deve ser adaptada ao seu condicionamento, mobilidade e orientação profissional quando necessário.</p>
+      <div id="exerciseLocked" class="locked">Calcule o perfil na aba IMC para liberar os cronogramas.</div>
+      <div id="exercisePlan" style="display:none">
+        <div class="subtabs" id="exerciseTabs">
+          <button class="subtab-btn active" data-ex="casa" type="button">Em casa</button>
+          <button class="subtab-btn" data-ex="academia" type="button">Academia</button>
+          <button class="subtab-btn" data-ex="corrida" type="button">Corrida de rua</button>
         </div>
-        <div class="subtab-panel active" id="sub-casa"><div class="schedule" id="scheduleCasa"></div></div>
-        <div class="subtab-panel" id="sub-academia"><div class="schedule" id="scheduleAcademia"></div></div>
-        <div class="subtab-panel" id="sub-corrida"><div class="schedule" id="scheduleCorrida"></div></div>
-        <div class="notice warning"><strong>Segurança:</strong> pare se houver dor, tontura, falta de ar fora do esperado ou mal-estar. Quem tem condição de saúde, lesão ou está retornando após longo período parado deve buscar orientação profissional antes de progredir.</div>
+        <div class="subtab-panel active" id="ex-casa"><div class="schedule" id="scheduleCasa"></div></div>
+        <div class="subtab-panel" id="ex-academia"><div class="schedule" id="scheduleAcademia"></div></div>
+        <div class="subtab-panel" id="ex-corrida"><div class="schedule" id="scheduleCorrida"></div></div>
+        <div class="notice warning"><strong>Segurança:</strong> interrompa a atividade em caso de dor, tontura ou mal-estar. Corrida deve ser feita em local seguro, com atenção ao trânsito, piso, clima e hidratação.</div>
       </div>
     </div>
   </section>
 
   <section class="tab-panel" id="tab-meta">
     <div class="section">
-      <h2>Meta</h2>
-      <p class="section-desc">Acompanhe o ponto de partida e metas de hábitos. O sistema não calcula “peso ideal” nem prazo automático para emagrecimento.</p>
-      <div id="goalLocked" class="notice warning show"><strong>Antes de continuar:</strong> gere seu perfil na aba IMC.</div>
-      <div id="goalContent" class="locked">
+      <h2>Meta de hábitos</h2>
+      <p class="section-desc">Acompanhe os dados atuais e metas práticas de rotina. O site não estima “peso ideal” nem prazo de emagrecimento, pois isso exige avaliação individual.</p>
+      <div id="goalLocked" class="locked">Calcule o perfil na aba IMC para visualizar esta área.</div>
+      <div id="goalPlan" style="display:none">
         <div class="goal-grid">
           <div class="goal-card"><span>Peso informado</span><b id="goalWeight">—</b></div>
-          <div class="goal-card"><span>IMC atual</span><b id="goalBmi">—</b></div>
-          <div class="goal-card"><span>Referência adulta</span><b>18,5 a 24,9</b></div>
-          <div class="goal-card"><span>Prazo estimado</span><b>Não calculado</b></div>
+          <div class="goal-card"><span>IMC atual</span><b id="goalImc">—</b></div>
+          <div class="goal-card"><span>Classificação</span><b id="goalCategory">—</b></div>
+          <div class="goal-card"><span>Faixa etária</span><b id="goalAge">—</b></div>
         </div>
-        <div class="notice"><strong>Por que não há previsão em dias/meses?</strong> Uma previsão de mudança de peso depende de histórico clínico, composição corporal, ingestão, gasto energético, medicamentos, sono, nível de atividade e acompanhamento profissional. O site usa metas de processo, não uma promessa de prazo.</div>
-        <h3 style="margin-top:16px">Metas semanais de hábitos</h3>
-        <div class="checklist">
-          <div class="check">✓ Realizar 3 sessões de atividade física na semana.</div>
-          <div class="check">✓ Manter refeições variadas e regulares.</div>
-          <div class="check">✓ Priorizar recuperação, hidratação e sono adequado.</div>
-        </div>
+        <div class="checklist"><div class="check">✓ Organizar refeições regulares e variadas</div><div class="check">✓ Praticar atividade física 3x por semana</div><div class="check">✓ Acompanhar evolução com foco em saúde e bem-estar</div></div>
+        <div class="notice"><strong>Referência:</strong> a faixa de IMC adulto de 18,5 a 24,9 é uma referência populacional, não uma prescrição de peso individual.</div>
       </div>
     </div>
   </section>
 
-  <div class="footer">Saúde em Foco · versão 2026.08.08.5 · conteúdo geral para adultos de 20 a 65 anos</div>
+  <footer class="footer">Saúde em Foco · versão 2026.08.08.6 · Conteúdo educativo para adultos.</footer>
 </main>
+
 <script>
-const html=document.documentElement,themeButton=document.getElementById('themeButton');
-function setTheme(t){html.dataset.theme=t;localStorage.setItem('health-theme',t);themeButton.textContent=t==='light'?'☾ Escuro':'☀ Claro';document.querySelector('meta[name="theme-color"]').content=t==='light'?'#f4f7fb':'#08111f'}
-setTheme(localStorage.getItem('health-theme')||'light');themeButton.onclick=()=>setTheme(html.dataset.theme==='light'?'dark':'light');
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const html=document.documentElement, themeButton=$('#themeButton');
+function setTheme(theme){const t=theme==='dark'?'dark':'light';html.dataset.theme=t;localStorage.setItem('sef-theme',t);themeButton.textContent=t==='light'?'☾ Escuro':'☀ Claro';document.querySelector('meta[name="theme-color"]').content=t==='light'?'#f4f7fb':'#08111f'}
+setTheme(localStorage.getItem('sef-theme')||'light');themeButton.addEventListener('click',()=>setTheme(html.dataset.theme==='light'?'dark':'light'));
 
-document.querySelectorAll('.tab-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active')});
-document.querySelectorAll('.subtab-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.subtab-btn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.subtab-panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('sub-'+b.dataset.subtab).classList.add('active')});
+$$('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.tab;$$('.tab-btn').forEach(b=>b.classList.toggle('active',b===btn));$$('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===`tab-${id}`))}));
+$$('#exerciseTabs .subtab-btn').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.ex;$$('#exerciseTabs .subtab-btn').forEach(b=>b.classList.toggle('active',b===btn));$$('#tab-exercicios .subtab-panel').forEach(p=>p.classList.toggle('active',p.id===`ex-${id}`))}));
 
-const idadeEl=document.getElementById('idade'),sexoEl=document.getElementById('sexo'),alturaEl=document.getElementById('altura'),pesoEl=document.getElementById('peso'),erroEl=document.getElementById('erro');let profile=null;
-function num(v){return Number(String(v).trim().replace(',','.'))}function heightCm(v){const n=num(v);return n>0&&n<=3?n*100:n}
-function ageGroup(a){if(a<=25)return'20 a 25';if(a<=30)return'26 a 30';if(a<=35)return'31 a 35';if(a<=40)return'36 a 40';if(a<=45)return'41 a 45';if(a<=50)return'46 a 50';if(a<=55)return'51 a 55';if(a<=60)return'56 a 60';return'61 a 65'}
+const profile={ready:false,idade:null,sexo:'',alturaCm:null,peso:null,imc:null,faixa:'',categoria:''};
+function num(v){return Number(String(v).trim().replace(',','.'))}
+function heightCm(v){const n=num(v);return Number.isFinite(n)&&n>0&&n<=3?n*100:n}
+function ageBand(age){const bands=[[20,25],[26,30],[31,35],[36,40],[41,45],[46,50],[51,55],[56,60],[61,65]];const b=bands.find(([a,z])=>age>=a&&age<=z);return b?`${b[0]} a ${b[1]}`:'20 a 65'}
 function bmiCategory(v){if(v<18.5)return['Abaixo do peso','IMC abaixo de 18,5 na referência adulta.'];if(v<25)return['Peso saudável','IMC entre 18,5 e 24,9 na referência adulta.'];if(v<30)return['Sobrepeso','IMC entre 25,0 e 29,9 na referência adulta.'];if(v<35)return['Obesidade Grau I · Classe 1','IMC entre 30,0 e 34,9.'];if(v<40)return['Obesidade Grau II · Classe 2','IMC entre 35,0 e 39,9.'];return['Obesidade Grau III · Classe 3','IMC igual ou superior a 40,0.']}
 
-const meals={
- breakfast:['Iogurte natural + fruta + aveia','Pão integral + queijo + fruta','Ovos mexidos + pão integral + fruta','Mingau de aveia com leite + banana','Tapioca com ovo + fruta','Iogurte + granola simples + fruta','Sanduíche integral com queijo + fruta','Vitamina de fruta com leite + aveia','Cuscuz + ovo + fruta'],
- lunch:['Arroz + feijão + legumes + frango','Arroz integral + lentilha + salada + peixe','Macarrão + legumes + carne magra','Batata assada + feijão + salada + frango','Quinoa + lentilha + legumes + ovo','Arroz + feijão + verduras + peixe','Purê de batata + legumes + frango','Arroz integral + feijão + salada + ovo','Macarrão integral + molho de tomate + legumes + frango'],
- snack:['Fruta + iogurte','Sanduíche integral com queijo','Fruta + castanhas','Iogurte + aveia','Pão integral + ricota','Vitamina de fruta com leite','Fruta + queijo','Iogurte + fruta picada','Torrada integral + pasta de grão-de-bico'],
- dinner:['Sopa de legumes + proteína','Arroz + feijão + legumes + ovo','Omelete com legumes + acompanhamento integral','Sanduíche integral com frango + salada','Batata + legumes + peixe','Arroz integral + lentilha + verduras','Macarrão com legumes + proteína','Creme de legumes + ovo + pão integral','Cuscuz + ovo + legumes']
-};
 const days=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
-function pick3(arr,start){return[0,1,2].map(i=>arr[(start+i)%arr.length])}
-function mealHtml(name,items){return`<div class="meal"><b>${name}</b><ol>${items.map(x=>`<li>${x}</li>`).join('')}</ol></div>`}
-function renderMeals(){const seed=(profile.age+(profile.sex==='feminino'?5:11)+Math.round(profile.bmi*10)+Math.round(profile.height)+Math.round(profile.weight))%meals.breakfast.length;document.getElementById('mealWeek').innerHTML=days.map((d,i)=>{const s=(seed+i*2)%9;return`<article class="day-card"><h4>${d}</h4>${mealHtml('Café da manhã',pick3(meals.breakfast,s))}${mealHtml('Almoço',pick3(meals.lunch,s+1))}${mealHtml('Café da tarde',pick3(meals.snack,s+2))}${mealHtml('Jantar',pick3(meals.dinner,s+3))}</article>`}).join('');document.getElementById('foodProfile').innerHTML=`<strong>Perfil:</strong> ${profile.sexLabel}, ${profile.group} anos, IMC ${profile.bmi.toFixed(1).replace('.',',')}. As opções são rotacionadas conforme o perfil; porções e calorias não são calculadas automaticamente.`}
-
-const ex={
- casa:[['Segunda · Corpo inteiro',['5–8 min de aquecimento leve','Sentar e levantar da cadeira · 2 séries confortáveis','Flexão na parede · 2 séries confortáveis','Ponte de quadril · 2 séries confortáveis','Mobilidade leve para finalizar']],['Quarta · Mobilidade + força',['Caminhada leve no lugar','Agachamento com apoio de cadeira','Bird-dog alternado','Elevação de panturrilha com apoio','Alongamentos suaves sem forçar']],['Sexta · Corpo inteiro',['Aquecimento leve','Subida em degrau baixo ou marcha estacionária','Remada com elástico, se disponível','Ponte de quadril','Mobilidade e respiração tranquila']]],
- academia:[['Segunda · Full body A',['5–10 min de aquecimento leve','Leg press ou agachamento guiado','Puxada frontal','Supino em máquina','Exercícios de core com técnica confortável']],['Quarta · Full body B',['Aquecimento leve','Cadeira extensora ou movimento equivalente','Remada sentada','Desenvolvimento em máquina leve','Panturrilhas + mobilidade']],['Sexta · Full body C',['Aquecimento leve','Movimento de quadril guiado','Puxada ou remada','Empurrar em máquina','Finalização aeróbica leve a moderada']]],
- corrida:[['Segunda · Caminhar + trotar',['5 min de caminhada leve','Alternar caminhada rápida e trote confortável por cerca de 20 min','Manter ritmo em que seja possível conversar','5 min de caminhada para desacelerar']],['Quarta · Sessão leve',['Caminhada inicial','Trote leve ou caminhada rápida por 20–25 min','Sem buscar velocidade máxima','Desacelerar gradualmente']],['Sexta · Caminhar + trotar',['5 min de caminhada','Alternar blocos confortáveis de caminhada e trote','Total aproximado de 20–30 min conforme tolerância','Finalizar caminhando lentamente']]]
+const pools={
+  breakfast:[
+    ['Ovos, pão integral e fruta','Ovos preparados de forma simples, pão integral e uma fruta da estação.','🍳'],
+    ['Iogurte, aveia e banana','Iogurte natural com aveia, banana e canela.','🥣'],
+    ['Tapioca e queijo branco','Tapioca com queijo branco e uma fruta fresca.','🫓'],
+    ['Pão integral, queijo e mamão','Pão integral com queijo branco acompanhado de mamão.','🍞'],
+    ['Cuscuz, ovo e fruta','Cuscuz com ovo e uma fruta da estação.','🌽'],
+    ['Vitamina de fruta e aveia','Bebida de fruta com leite ou alternativa habitual e aveia.','🥛'],
+    ['Fruta, iogurte e granola simples','Combinação de fruta, iogurte natural e granola simples.','🍓']
+  ],
+  lunch:[
+    ['Arroz, feijão, frango e salada','Prato com arroz, feijão, frango e vegetais variados.','🍛'],
+    ['Peixe, batata e legumes','Peixe preparado de forma simples com batata e legumes.','🐟'],
+    ['Carne magra, arroz e vegetais','Carne magra com arroz e vegetais coloridos.','🥩'],
+    ['Macarrão, proteína e salada','Macarrão com uma fonte de proteína e salada variada.','🍝'],
+    ['Arroz, lentilha, ovo e legumes','Arroz com lentilha, ovo e legumes.','🥚'],
+    ['Frango, mandioca e salada','Frango com mandioca cozida e salada.','🍗'],
+    ['Feijão, arroz, peixe e verduras','Feijão, arroz, peixe e verduras variadas.','🥗']
+  ],
+  snack:[
+    ['Fruta e iogurte','Uma fruta acompanhada de iogurte natural.','🍎'],
+    ['Sanduíche integral simples','Pão integral com queijo branco e vegetais.','🥪'],
+    ['Fruta e castanhas','Fruta da estação acompanhada de castanhas.','🥜'],
+    ['Iogurte e aveia','Iogurte natural com aveia e fruta.','🥣'],
+    ['Pão integral e pasta de grão-de-bico','Pão integral com pasta de grão-de-bico e tomate.','🫘'],
+    ['Milho ou pipoca simples e fruta','Milho ou pipoca simples acompanhado de fruta.','🍿'],
+    ['Queijo branco e fruta','Queijo branco acompanhado de fruta da estação.','🧀']
+  ],
+  dinner:[
+    ['Omelete e salada','Omelete com vegetais e salada variada.','🍳'],
+    ['Sopa de legumes com proteína','Sopa de legumes com frango, feijão ou outra proteína habitual.','🍲'],
+    ['Arroz, feijão e legumes','Arroz, feijão e legumes em uma refeição simples.','🍚'],
+    ['Peixe e vegetais','Peixe com vegetais variados e acompanhamento habitual.','🐟'],
+    ['Frango e legumes','Frango com legumes e uma fonte de carboidrato habitual.','🍗'],
+    ['Sanduíche completo','Pão integral com proteína, folhas e tomate.','🥪'],
+    ['Macarrão com legumes','Macarrão com legumes e uma fonte de proteína.','🍝']
+  ]
 };
-function sessionsHtml(list){return list.map(x=>`<article class="session"><div class="day">${x[0].split(' · ')[0]}</div><h4>${x[0].split(' · ')[1]}</h4><ul>${x[1].map(i=>`<li>${i}</li>`).join('')}</ul></article>`).join('')}
-function renderExercises(){document.getElementById('scheduleCasa').innerHTML=sessionsHtml(ex.casa);document.getElementById('scheduleAcademia').innerHTML=sessionsHtml(ex.academia);document.getElementById('scheduleCorrida').innerHTML=sessionsHtml(ex.corrida);document.getElementById('exerciseProfile').innerHTML=`<strong>Perfil:</strong> ${profile.sexLabel}, ${profile.group} anos, IMC ${profile.bmi.toFixed(1).replace('.',',')}. O cronograma permanece moderado; idade, sexo ou IMC não são usados para impor intensidade maior.`}
-function unlock(){['foodLocked','exerciseLocked','goalLocked'].forEach(id=>document.getElementById(id).classList.remove('show'));['foodContent','exerciseContent','goalContent'].forEach(id=>document.getElementById(id).classList.add('show'));renderMeals();renderExercises();document.getElementById('goalWeight').textContent=profile.weight.toFixed(1).replace('.',',')+' kg';document.getElementById('goalBmi').textContent=profile.bmi.toFixed(1).replace('.',',')}
+const mealNames={breakfast:'Café da Manhã',lunch:'Almoço',snack:'Café da Tarde',dinner:'Jantar'};
 
-document.getElementById('profileForm').onsubmit=e=>{e.preventDefault();erroEl.textContent='';const age=Number(idadeEl.value),sex=sexoEl.value,h=heightCm(alturaEl.value),w=num(pesoEl.value);if(!Number.isInteger(age)||age<20||age>65){erroEl.textContent='Informe uma idade inteira entre 20 e 65 anos.';return}if(!sex){erroEl.textContent='Selecione o sexo.';return}if(!Number.isFinite(h)||h<120||h>230){erroEl.textContent='Confira a altura. Exemplos: 183, 1.83 ou 1,83.';return}if(!Number.isFinite(w)||w<30||w>300){erroEl.textContent='Confira o peso informado em quilogramas.';return}const bmi=w/((h/100)**2),cat=bmiCategory(bmi);profile={age,sex,sexLabel:sex==='feminino'?'Feminino':'Masculino',group:ageGroup(age),height:h,weight:w,bmi};document.getElementById('valorImc').textContent=bmi.toFixed(1).replace('.',',');document.getElementById('categoria').textContent=cat[0];document.getElementById('descricao').textContent=cat[1];document.getElementById('profileBadge').textContent=`${profile.sexLabel} · ${profile.age} anos · faixa ${profile.group} · ${h.toFixed(1).replace('.',',')} cm · ${w.toFixed(1).replace('.',',')} kg`;document.getElementById('resultado').classList.add('show');unlock()};
-document.getElementById('limpar').onclick=()=>{document.getElementById('profileForm').reset();profile=null;erroEl.textContent='';document.getElementById('resultado').classList.remove('show');['foodLocked','exerciseLocked','goalLocked'].forEach(id=>document.getElementById(id).classList.add('show'));['foodContent','exerciseContent','goalContent'].forEach(id=>document.getElementById(id).classList.remove('show'));alturaEl.focus()};
+function svgImage(title,emoji,type){
+  const palettes={breakfast:['#fff7ed','#fed7aa'],lunch:['#eff6ff','#bfdbfe'],snack:['#f0fdf4','#bbf7d0'],dinner:['#faf5ff','#ddd6fe']};
+  const [a,b]=palettes[type]||['#f8fafc','#e2e8f0'];
+  const safe=title.replace(/[&<>"']/g,'');
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="800" height="450" fill="url(#g)"/><circle cx="400" cy="202" r="132" fill="#fff" opacity=".92"/><circle cx="400" cy="202" r="106" fill="none" stroke="#cbd5e1" stroke-width="4"/><text x="400" y="225" text-anchor="middle" font-size="96">${emoji}</text><rect x="70" y="348" width="660" height="58" rx="18" fill="#0f172a" opacity=".88"/><text x="400" y="385" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#fff">${safe}</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+function profileSeed(){return (profile.idade||20)+(profile.sexo==='feminino'?3:7)}
+function getOptions(type,dayIndex){const pool=pools[type],start=(dayIndex*2+profileSeed())%pool.length;return [0,1,2].map(i=>pool[(start+i)%pool.length])}
+function renderMealDay(dayIndex){
+  const content=$('#mealDayContent');
+  content.innerHTML=['breakfast','lunch','snack','dinner'].map(type=>{
+    const opts=getOptions(type,dayIndex);
+    return `<section class="meal-section"><div class="meal-section-title"><h3>${mealNames[type]}</h3><span>Escolha uma das 3 opções</span></div><div class="meal-grid">${opts.map((o,i)=>`<article class="meal-card"><img loading="lazy" src="${svgImage(o[0],o[2],type)}" alt="Ilustração: ${o[0]}"><div class="meal-card-body"><span class="option">Opção ${i+1}</span><h4>${o[0]}</h4><p>${o[1]}</p></div></article>`).join('')}</div></section>`
+  }).join('');
+}
+function buildDayTabs(){const wrap=$('#mealDayTabs');wrap.innerHTML=days.map((d,i)=>`<button class="subtab-btn ${i===0?'active':''}" data-day="${i}" type="button">${d}</button>`).join('');wrap.querySelectorAll('.subtab-btn').forEach(btn=>btn.addEventListener('click',()=>{wrap.querySelectorAll('.subtab-btn').forEach(b=>b.classList.toggle('active',b===btn));renderMealDay(Number(btn.dataset.day))}));renderMealDay(0)}
+
+function sessionCard(day,title,items){return `<article class="session"><span class="day">${day}</span><h4>${title}</h4><ul>${items.map(x=>`<li>${x}</li>`).join('')}</ul></article>`}
+function renderExercises(){
+  const older=profile.idade>=56;
+  $('#scheduleCasa').innerHTML=[sessionCard('Dia 1','Força básica',[older?'Sentar e levantar de cadeira com apoio, ritmo confortável':'Agachamento até a cadeira, ritmo confortável','Flexão na parede','Elevação de panturrilhas','Mobilidade leve']),sessionCard('Dia 2','Mobilidade e tronco',['Caminhada leve no lugar','Ponte de quadril','Remada com elástico, se disponível','Mobilidade de ombros e quadril']),sessionCard('Dia 3','Circuito leve',['Sentar e levantar','Flexão na parede ou bancada','Marcha no lugar','Alongamentos leves ao final'])].join('');
+  $('#scheduleAcademia').innerHTML=[sessionCard('Dia 1','Corpo inteiro',['Aquecimento leve','Leg press ou exercício equivalente com carga confortável','Remada sentada','Supino em máquina ou equivalente','Mobilidade ao final']),sessionCard('Dia 2','Força e estabilidade',['Aquecimento leve','Cadeira extensora ou variação confortável','Puxada frontal','Elevação lateral leve','Exercícios de estabilidade']),sessionCard('Dia 3','Corpo inteiro',['Aquecimento leve','Exercício de pernas confortável','Remada ou puxada','Exercício de empurrar','Caminhada leve ao final'])].join('');
+  $('#scheduleCorrida').innerHTML=[sessionCard('Dia 1',older?'Caminhada ativa':'Caminhada + trote leve',[older?'Caminhada em ritmo confortável com pausas quando necessário':'Alternar caminhada e trote leve','Manter ritmo em que seja possível conversar','Finalizar caminhando devagar']),sessionCard('Dia 2','Técnica e ritmo',['Aquecimento caminhando','Trecho contínuo em ritmo confortável','Sem buscar velocidade máxima','Desacelerar progressivamente']),sessionCard('Dia 3','Sessão leve',['Percurso plano e conhecido','Ritmo confortável','Pausas de caminhada quando necessário','Finalizar com mobilidade leve'])].join('');
+}
+function unlockPlans(){
+  $('#mealLocked').style.display='none';$('#mealPlan').classList.add('show');
+  $('#exerciseLocked').style.display='none';$('#exercisePlan').style.display='block';
+  $('#goalLocked').style.display='none';$('#goalPlan').style.display='block';
+  $('#mealProfile').classList.add('show');$('#mealProfile').innerHTML=`<span class="chip">Perfil: ${profile.sexo==='feminino'?'Feminino':'Masculino'}</span><span class="chip">Faixa etária: ${profile.faixa}</span><span class="chip">IMC: ${profile.imc.toFixed(1).replace('.',',')}</span><span class="chip">Sugestões gerais, sem calorias</span>`;
+  buildDayTabs();renderExercises();
+  $('#goalWeight').textContent=`${profile.peso.toFixed(1).replace('.',',')} kg`;$('#goalImc').textContent=profile.imc.toFixed(1).replace('.',',');$('#goalCategory').textContent=profile.categoria;$('#goalAge').textContent=profile.faixa;
+}
+function resetPlans(){profile.ready=false;$('#mealLocked').style.display='block';$('#mealPlan').classList.remove('show');$('#exerciseLocked').style.display='block';$('#exercisePlan').style.display='none';$('#goalLocked').style.display='block';$('#goalPlan').style.display='none'}
+
+$('#profileForm').addEventListener('submit',e=>{e.preventDefault();const idade=Number($('#idade').value),sexo=$('#sexo').value,altura=heightCm($('#altura').value),peso=num($('#peso').value);$('#erro').textContent='';if(!Number.isInteger(idade)||idade<20||idade>65){$('#erro').textContent='Informe uma idade inteira entre 20 e 65 anos.';return}if(!sexo){$('#erro').textContent='Selecione o sexo.';return}if(!Number.isFinite(altura)||altura<120||altura>230){$('#erro').textContent='Confira a altura. Exemplos: 183, 1.83 ou 1,83.';return}if(!Number.isFinite(peso)||peso<30||peso>300){$('#erro').textContent='Confira o peso informado em quilogramas.';return}const imc=peso/((altura/100)**2),[cat,desc]=bmiCategory(imc);Object.assign(profile,{ready:true,idade,sexo,alturaCm:altura,peso,imc,faixa:ageBand(idade),categoria:cat});$('#valorImc').textContent=imc.toFixed(1).replace('.',',');$('#categoria').textContent=cat;$('#descricao').textContent=desc;$('#profileBadge').textContent=`${sexo==='feminino'?'Feminino':'Masculino'} · ${idade} anos · ${altura.toFixed(0)} cm · ${peso.toFixed(1).replace('.',',')} kg`;$('#resultado').classList.add('show');unlockPlans()});
+$('#limpar').addEventListener('click',()=>{$('#profileForm').reset();$('#resultado').classList.remove('show');$('#erro').textContent='';resetPlans();$('#idade').focus()});
+resetPlans();
 </script>
 </body>
 </html>
