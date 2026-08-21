@@ -30,29 +30,210 @@ button,input{font:inherit}.theme,.sub{border:1px solid var(--l);background:var(-
 <body>
 <main class="app">
 <div class="top"><div class="brand"><div class="logo">IMC</div><div><b>Saúde em Foco</b><small>IMC, alimentação, compras e exercícios</small></div></div><button id="theme" class="theme" aria-label="Alternar tema">☾</button></div>
-<section class="hero"><h1>Organize sua rotina de saúde.</h1><p>Calcule o IMC quando quiser. Alimentação, compras e exercícios ficam disponíveis independentemente do resultado.</p><div id="chips" class="chips"></div></section>
-<nav class="nav" aria-label="Seções principais"><button class="tab active" data-tab="imc">⌁<br>IMC</button><button class="tab" data-tab="food">🍽<br>Alimentação</button><button class="tab" data-tab="ex">🏃<br>Exercícios</button></nav>
-<section id="p-imc" class="panel active"><div class="card"><div class="head"><div><h2>Dados para cálculo</h2><p class="desc">Informe apenas altura e peso para calcular o IMC adulto.</p></div><span class="badge">IMC adulto</span></div><form id="form"><div class="grid"><div class="field"><label for="height">Altura</label><input id="height" class="input" inputmode="decimal" placeholder="1,83 ou 183" required></div><div class="field"><label for="weight">Peso (kg)</label><input id="weight" class="input" inputmode="decimal" placeholder="Ex.: 78,5" required></div></div><div id="err" class="error" role="alert"></div><div class="actions"><button class="primary">Calcular IMC</button><button type="button" id="clear" class="secondary">Limpar</button></div></form><div id="result" class="result"><div class="imc"><span id="imc">--</span> <small>kg/m²</small></div><b id="cat"></b><div id="profile" class="muted"></div><div id="healthy" class="healthy"></div></div></div><div class="card"><h3>Referência de IMC para adultos</h3><p class="desc">Após o cálculo, cada categoria mostra o peso-limite correspondente à altura informada.</p><div class="refs"><div class="ref"><b>Abaixo do peso · &lt;18,5</b><span>Referência adulta.</span><span id="wu" class="limit">Informe a altura para calcular.</span></div><div class="ref"><b>Peso saudável · 18,5–24,9</b><span>Referência adulta.</span><span id="wh" class="limit">Informe a altura para calcular.</span></div><div class="ref"><b>Sobrepeso · 25,0–29,9</b><span>Referência adulta.</span><span id="wo" class="limit">Informe a altura para calcular.</span></div><div class="ref"><b>Obesidade I · 30,0–34,9</b><span>Classe 1.</span><span id="w1" class="limit">Informe a altura para calcular.</span></div><div class="ref"><b>Obesidade II · 35,0–39,9</b><span>Classe 2.</span><span id="w2" class="limit">Informe a altura para calcular.</span></div><div class="ref"><b>Obesidade III · ≥40,0</b><span>Classe 3.</span><span id="w3" class="limit">Informe a altura para calcular.</span></div></div><div class="note">O IMC adulto usa peso ÷ altura² e funciona como uma medida de triagem, não como diagnóstico.</div></div></section>
-<section id="p-food" class="panel"><div class="card"><div class="head"><div><h2>Plano de alimentação</h2><p class="desc">Disponível sem cálculo de IMC. O dia atual é selecionado automaticamente.</p></div><span class="badge">Uso geral</span></div><div id="foodTabs" class="subtabs"></div><div id="foodView"></div><div class="note">Sugestões gerais para organização da rotina. Não representam prescrição de calorias, porções clínicas ou dieta terapêutica.</div></div></section>
-<section id="p-ex" class="panel"><div class="card"><div class="head"><div><h2>Exercícios 3x por semana</h2><p class="desc">Disponíveis sem cálculo de IMC. Escolha o ambiente e mantenha intensidade confortável.</p></div><span class="badge">3x/semana</span></div><div class="subtabs" id="exTabs"><button class="sub active" data-ex="home">🏠 Em casa</button><button class="sub" data-ex="gym">🏋 Academia</button><button class="sub" data-ex="run">🏃 Corrida</button></div><div id="exView"></div><div class="note warning">Interrompa a atividade se sentir dor, tontura, falta de ar fora do habitual ou mal-estar.</div></div></section>
-<footer class="footer">Saúde em Foco · versão 2026.08.21.14</footer>
+
+<section class="hero">
+  <h1>Organize sua rotina de saúde.</h1>
+  <p>Calcule o IMC quando quiser. Alimentação, compras e exercícios ficam disponíveis independentemente do resultado.</p>
+  <div id="chips" class="chips"></div>
+</section>
+
+<nav class="nav" aria-label="Seções principais">
+  <button class="tab active" data-tab="imc">⌁<br>IMC</button>
+  <button class="tab" data-tab="food">🍽<br>Alimentação</button>
+  <button class="tab" data-tab="ex">🏃<br>Exercícios</button>
+</nav>
+
+<section id="p-imc" class="panel active">
+  <div class="card">
+    <div class="head">
+      <div><h2>Dados para cálculo</h2><p class="desc">Informe apenas altura e peso para calcular o IMC adulto.</p></div>
+      <span class="badge">IMC adulto</span>
+    </div>
+    <form id="form">
+      <div class="grid">
+        <div class="field"><label for="height">Altura</label><input id="height" class="input" inputmode="decimal" placeholder="1,83 ou 183" required></div>
+        <div class="field"><label for="weight">Peso (kg)</label><input id="weight" class="input" inputmode="decimal" placeholder="Ex.: 78,5" required></div>
+      </div>
+      <div id="err" class="error" role="alert"></div>
+      <div class="actions"><button class="primary">Calcular IMC</button><button type="button" id="clear" class="secondary">Limpar</button></div>
+    </form>
+    <div id="result" class="result">
+      <div class="imc"><span id="imc">--</span> <small>kg/m²</small></div>
+      <b id="cat"></b>
+      <div id="profile" class="muted"></div>
+      <div id="healthy" class="healthy"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Referência de IMC para adultos</h3>
+    <p class="desc">Após o cálculo, cada categoria mostra o peso-limite correspondente à altura informada.</p>
+    <div class="refs">
+      <div class="ref"><b>Abaixo do peso · &lt;18,5</b><span>Referência adulta.</span><span id="wu" class="limit">Informe a altura para calcular.</span></div>
+      <div class="ref"><b>Peso saudável · 18,5–24,9</b><span>Referência adulta.</span><span id="wh" class="limit">Informe a altura para calcular.</span></div>
+      <div class="ref"><b>Sobrepeso · 25,0–29,9</b><span>Referência adulta.</span><span id="wo" class="limit">Informe a altura para calcular.</span></div>
+      <div class="ref"><b>Obesidade I · 30,0–34,9</b><span>Classe 1.</span><span id="w1" class="limit">Informe a altura para calcular.</span></div>
+      <div class="ref"><b>Obesidade II · 35,0–39,9</b><span>Classe 2.</span><span id="w2" class="limit">Informe a altura para calcular.</span></div>
+      <div class="ref"><b>Obesidade III · ≥40,0</b><span>Classe 3.</span><span id="w3" class="limit">Informe a altura para calcular.</span></div>
+    </div>
+    <div class="note">O IMC adulto usa peso ÷ altura² e funciona como uma medida de triagem, não como diagnóstico.</div>
+  </div>
+</section>
+
+<section id="p-food" class="panel">
+  <div class="card">
+    <div class="head"><div><h2>Plano de alimentação</h2><p class="desc">Disponível sem cálculo de IMC. O dia atual é selecionado automaticamente.</p></div><span class="badge">Uso geral</span></div>
+    <div id="foodTabs" class="subtabs"></div>
+    <div id="foodView"></div>
+    <div class="note">Sugestões gerais para organização da rotina. Não representam prescrição de calorias, porções clínicas ou dieta terapêutica. Fotos de referência visual: Unsplash e Pixabay.</div>
+  </div>
+</section>
+
+<section id="p-ex" class="panel">
+  <div class="card">
+    <div class="head"><div><h2>Exercícios 3x por semana</h2><p class="desc">Disponíveis sem cálculo de IMC. Escolha o ambiente e mantenha intensidade confortável.</p></div><span class="badge">3x/semana</span></div>
+    <div class="subtabs" id="exTabs"><button class="sub active" data-ex="home">🏠 Em casa</button><button class="sub" data-ex="gym">🏋 Academia</button><button class="sub" data-ex="run">🏃 Corrida</button></div>
+    <div id="exView"></div>
+    <div class="note warning">Interrompa a atividade se sentir dor, tontura, falta de ar fora do habitual ou mal-estar.</div>
+  </div>
+</section>
+
+<footer class="footer">Saúde em Foco · versão 2026.08.21.15</footer>
 </main>
+
 <script>
-const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);let user=null,buy=1;
-function setTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('theme',t);$('#theme').textContent=t==='dark'?'☀':'☾'}setTheme(localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));$('#theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
-$$('.tab').forEach(b=>b.onclick=()=>{$$('.tab').forEach(x=>x.classList.toggle('active',x===b));$$('.panel').forEach(p=>p.classList.toggle('active',p.id==='p-'+b.dataset.tab));scrollTo({top:0,behavior:'smooth'})});
-const num=v=>Number(String(v).trim().replace(',','.')),hcm=v=>{const n=num(v);return n>0&&n<=3?n*100:n},cls=x=>x<18.5?'Abaixo do peso':x<25?'Peso saudável':x<30?'Sobrepeso':x<35?'Obesidade Grau I':x<40?'Obesidade Grau II':'Obesidade Grau III',kg=x=>x.toFixed(1).replace('.',',')+' kg';
-function refs(h){const q=(h/100)**2;$('#wu').textContent='Abaixo de '+kg(18.5*q);$('#wh').textContent='Mínimo da categoria: '+kg(18.5*q);$('#wo').textContent='Mínimo da categoria: '+kg(25*q);$('#w1').textContent='Mínimo da categoria: '+kg(30*q);$('#w2').textContent='Mínimo da categoria: '+kg(35*q);$('#w3').textContent='Mínimo da categoria: '+kg(40*q)}
-$('#form').onsubmit=e=>{e.preventDefault();const h=hcm($('#height').value),w=num($('#weight').value);$('#err').textContent='';if(!Number.isFinite(h)||h<120||h>230)return $('#err').textContent='Confira a altura. Exemplos: 183, 1.83 ou 1,83.';if(!Number.isFinite(w)||w<30||w>300)return $('#err').textContent='Confira o peso informado em quilogramas.';const bmi=w/((h/100)**2),cat=cls(bmi),q=(h/100)**2;user={h,w,bmi,cat};$('#imc').textContent=bmi.toFixed(1).replace('.',',');$('#cat').textContent=cat;$('#profile').textContent=`${h.toFixed(0)} cm · ${w.toFixed(1).replace('.',',')} kg`;$('#healthy').innerHTML=`<b>Faixa de peso de referência:</b> ${kg(18.5*q)} a ${kg(24.9*q)} (IMC 18,5–24,9)`;$('#result').classList.add('show');$('#chips').innerHTML=`<span class="chip">${h.toFixed(0)} cm</span><span class="chip">${w.toFixed(1).replace('.',',')} kg</span><span class="chip">IMC ${bmi.toFixed(1).replace('.',',')}</span><span class="chip">${cat}</span>`;$('#chips').classList.add('show');refs(h);const active=$('#foodTabs .sub.active');if(active&&active.dataset.food!=='shop')dayPlan(+active.dataset.food)};
-$('#clear').onclick=()=>{$('#form').reset();user=null;$('#result').classList.remove('show');$('#chips').classList.remove('show');$('#chips').innerHTML='';['wu','wh','wo','w1','w2','w3'].forEach(id=>$('#'+id).textContent='Informe a altura para calcular.')};
-const days=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],today=()=>{const d=new Date().getDay();return d===0?6:d-1};
-const meals={breakfast:[['Ovos, pão integral e fruta','Ovos mexidos, pão integral e fruta fresca.','assets/food/breakfast-eggs.svg'],['Iogurte, aveia e banana','Iogurte natural com aveia e banana.','assets/food/breakfast-yogurt.svg'],['Tapioca e fruta','Tapioca com queijo branco e fruta.','assets/food/breakfast-tapioca.svg']],lunch:[['Arroz, feijão e frango','Arroz, feijão, frango e salada.','assets/food/lunch-chicken.svg'],['Peixe e legumes','Peixe, arroz ou batata e legumes.','assets/food/lunch-fish.svg'],['Carne magra e vegetais','Carne magra, arroz, feijão e vegetais.','assets/food/lunch-beef.svg']],snack:[['Fruta e iogurte','Fruta com iogurte natural.','assets/food/snack-yogurt.svg'],['Sanduíche integral','Pão integral, queijo branco e tomate.','assets/food/snack-sandwich.svg'],['Fruta e castanhas','Fruta com castanhas.','assets/food/snack-nuts.svg']],dinner:[['Omelete e salada','Omelete com vegetais e salada.','assets/food/dinner-omelette.svg'],['Sopa completa','Sopa de legumes com feijão ou frango.','assets/food/dinner-soup.svg'],['Arroz, feijão e vegetais','Arroz, feijão e vegetais variados.','assets/food/dinner-rice-beans.svg']]};
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+let user=null,buy=1;
+
+function setTheme(t){
+  document.documentElement.dataset.theme=t;
+  localStorage.setItem('theme',t);
+  $('#theme').textContent=t==='dark'?'☀':'☾';
+}
+setTheme(localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));
+$('#theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+
+$$('.tab').forEach(b=>b.onclick=()=>{
+  $$('.tab').forEach(x=>x.classList.toggle('active',x===b));
+  $$('.panel').forEach(p=>p.classList.toggle('active',p.id==='p-'+b.dataset.tab));
+  scrollTo({top:0,behavior:'smooth'});
+});
+
+const num=v=>Number(String(v).trim().replace(',','.'));
+const hcm=v=>{const n=num(v);return n>0&&n<=3?n*100:n};
+const cls=x=>x<18.5?'Abaixo do peso':x<25?'Peso saudável':x<30?'Sobrepeso':x<35?'Obesidade Grau I':x<40?'Obesidade Grau II':'Obesidade Grau III';
+const kg=x=>x.toFixed(1).replace('.',',')+' kg';
+
+function refs(h){
+  const q=(h/100)**2;
+  $('#wu').textContent='Abaixo de '+kg(18.5*q);
+  $('#wh').textContent='Mínimo da categoria: '+kg(18.5*q);
+  $('#wo').textContent='Mínimo da categoria: '+kg(25*q);
+  $('#w1').textContent='Mínimo da categoria: '+kg(30*q);
+  $('#w2').textContent='Mínimo da categoria: '+kg(35*q);
+  $('#w3').textContent='Mínimo da categoria: '+kg(40*q);
+}
+
+$('#form').onsubmit=e=>{
+  e.preventDefault();
+  const h=hcm($('#height').value),w=num($('#weight').value);
+  $('#err').textContent='';
+  if(!Number.isFinite(h)||h<120||h>230)return $('#err').textContent='Confira a altura. Exemplos: 183, 1.83 ou 1,83.';
+  if(!Number.isFinite(w)||w<30||w>300)return $('#err').textContent='Confira o peso informado em quilogramas.';
+  const bmi=w/((h/100)**2),cat=cls(bmi),q=(h/100)**2;
+  user={h,w,bmi,cat};
+  $('#imc').textContent=bmi.toFixed(1).replace('.',',');
+  $('#cat').textContent=cat;
+  $('#profile').textContent=`${h.toFixed(0)} cm · ${w.toFixed(1).replace('.',',')} kg`;
+  $('#healthy').innerHTML=`<b>Faixa de peso de referência:</b> ${kg(18.5*q)} a ${kg(24.9*q)} (IMC 18,5–24,9)`;
+  $('#result').classList.add('show');
+  $('#chips').innerHTML=`<span class="chip">${h.toFixed(0)} cm</span><span class="chip">${w.toFixed(1).replace('.',',')} kg</span><span class="chip">IMC ${bmi.toFixed(1).replace('.',',')}</span><span class="chip">${cat}</span>`;
+  $('#chips').classList.add('show');
+  refs(h);
+  const active=$('#foodTabs .sub.active');
+  if(active&&active.dataset.food!=='shop')dayPlan(+active.dataset.food);
+};
+
+$('#clear').onclick=()=>{
+  $('#form').reset();user=null;$('#result').classList.remove('show');$('#chips').classList.remove('show');$('#chips').innerHTML='';
+  ['wu','wh','wo','w1','w2','w3'].forEach(id=>$('#'+id).textContent='Informe a altura para calcular.');
+};
+
+const days=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
+const today=()=>{const d=new Date().getDay();return d===0?6:d-1};
+
+const meals={
+  breakfast:[
+    ['Ovos, pão integral e fruta','Ovos mexidos, pão integral e fruta fresca.','https://images.unsplash.com/photo-1773915950201-c417d02cf1e5?auto=format&fit=crop&w=900&q=80'],
+    ['Iogurte, aveia e banana','Iogurte natural com aveia e banana.','https://images.unsplash.com/photo-1763576178054-ff0152753fd8?auto=format&fit=crop&w=900&q=80'],
+    ['Tapioca e fruta','Tapioca com queijo branco e fruta.','https://cdn.pixabay.com/photo/2020/07/04/21/35/tapioca-5371009_1280.jpg']
+  ],
+  lunch:[
+    ['Arroz, feijão e frango','Arroz, feijão, frango e salada.','https://cdn.pixabay.com/photo/2017/03/31/07/56/rice-2190645_1280.jpg'],
+    ['Peixe e legumes','Peixe, arroz ou batata e legumes.','https://images.unsplash.com/photo-1710508813876-687f0da1b817?auto=format&fit=crop&w=900&q=80'],
+    ['Carne magra e vegetais','Carne magra, arroz, feijão e vegetais.','https://images.unsplash.com/photo-1705088293214-7494366cce01?auto=format&fit=crop&w=900&q=80']
+  ],
+  snack:[
+    ['Fruta e iogurte','Fruta com iogurte natural.','https://images.unsplash.com/photo-1763576178054-ff0152753fd8?auto=format&fit=crop&w=900&q=80'],
+    ['Sanduíche integral','Pão integral, queijo branco e tomate.','https://images.unsplash.com/photo-1725289079414-f903a89bd75b?auto=format&fit=crop&w=900&q=80'],
+    ['Fruta e castanhas','Fruta com castanhas.','https://cdn.pixabay.com/photo/2018/05/28/10/38/dried-fruits-and-nuts-3435716_1280.jpg']
+  ],
+  dinner:[
+    ['Omelete e salada','Omelete com vegetais e salada.','https://cdn.pixabay.com/photo/2017/08/08/08/59/breakfast-2610761_1280.jpg'],
+    ['Sopa completa','Sopa de legumes com feijão ou frango.','https://images.unsplash.com/photo-1578859318509-62790b079366?auto=format&fit=crop&w=900&q=80'],
+    ['Arroz, feijão e vegetais','Arroz, feijão e vegetais variados.','https://cdn.pixabay.com/photo/2024/12/01/12/19/food-9237114_1280.jpg']
+  ]
+};
+const photoFallback='assets/food/fallback.svg?v=15';
+
 const rot=(a,n)=>[...a.slice(n%3),...a.slice(0,n%3)];
-function dayPlan(i){let out=`<div class="note"><b>${days[i]}${i===today()?' · Hoje':''}</b> · ${user?'IMC calculado disponível; as opções permanecem gerais.':'Opções gerais para adultos, sem depender do IMC.'}</div>`;[['Café da manhã','breakfast'],['Almoço','lunch'],['Café da tarde','snack'],['Jantar','dinner']].forEach(([t,k])=>{const a=rot(meals[k],i);out+=`<div class="meal-block"><h3>${t}</h3><div class="meals">${a.map((m,j)=>`<article class="meal"><img loading="lazy" src="${m[2]}?v=14" alt="Ilustração de ${m[0]}" onerror="this.onerror=null;this.src='assets/food/fallback.svg?v=14'"><div class="body"><span class="opt">Opção ${j+1}</span><h4>${m[0]}</h4><p>${m[1]}</p></div></article>`).join('')}</div></div>`});$('#foodView').innerHTML=out}
-const shopping={1:[['Ovos','12 un.','7 dias'],['Pão integral','1 pacote','5–7 dias'],['Frutas','14 un.','3–4 dias'],['Arroz','1 kg','14–30 dias'],['Feijão','500 g','14 dias'],['Frango','1 kg','7 dias'],['Folhas','2 maços','3–4 dias'],['Legumes','1,5 kg','4–7 dias'],['Iogurte','7 un.','7 dias']],2:[['Iogurte','7 un.','7 dias'],['Aveia','500 g','20–30 dias'],['Frutas','14 un.','3–4 dias'],['Peixe','1,2 kg','7 dias'],['Batata/mandioca','1 kg','7–10 dias'],['Legumes','2 kg','4–7 dias'],['Pão integral','1 pacote','5–7 dias'],['Queijo branco','300 g','5–7 dias']],3:[['Tapioca','500 g','14–20 dias'],['Queijo branco','400 g','5–7 dias'],['Frutas','14 un.','3–4 dias'],['Carne magra','1 kg','7 dias'],['Arroz','1 kg','14–30 dias'],['Feijão','500 g','14 dias'],['Vegetais','2 kg','4–7 dias'],['Castanhas','200 g','14–20 dias']]};
-function shop(){const a=shopping[buy];$('#foodView').innerHTML=`<h3>Compras do plano</h3><div class="shop-options">${[1,2,3].map(n=>`<button data-buy="${n}" class="${n===buy?'active':''}">Opção ${n}</button>`).join('')}</div><div class="cycles"><div class="cycle"><b>Hortifruti</b><span>3–4 dias</span></div><div class="cycle"><b>Refrigerados</b><span>5–7 dias</span></div><div class="cycle"><b>Proteínas</b><span>7 dias</span></div><div class="cycle"><b>Secos</b><span>14–30 dias</span></div></div><div class="shopping">${a.map(x=>`<div class="shop-row"><b>${x[0]}</b><strong>${x[1]}</strong><span>Repor em ${x[2]}</span></div>`).join('')}</div><div class="muted" style="margin-top:8px">Quantidades aproximadas para organização de compras; ajuste conforme consumo da casa e validade dos alimentos.</div>`;$$('[data-buy]').forEach(b=>b.onclick=()=>{buy=+b.dataset.buy;shop()})}
-function foodTab(k){$$('#foodTabs .sub').forEach(b=>b.classList.toggle('active',b.dataset.food===k));k==='shop'?shop():dayPlan(+k)}function foodTabs(){const t=today();$('#foodTabs').innerHTML=`<button class="sub" data-food="shop">🛒 Compras</button>`+days.map((d,i)=>`<button class="sub ${i===t?'active':''}" data-food="${i}">${d}${i===t?' · Hoje':''}</button>`).join('');$$('#foodTabs .sub').forEach(b=>b.onclick=()=>foodTab(b.dataset.food));dayPlan(t)}
-const plans={home:[['Segunda','Corpo inteiro',['5–8 min de aquecimento leve','Sentar e levantar da cadeira','Flexão na parede','Panturrilhas','Mobilidade final']],['Quarta','Força + mobilidade',['Ponte de quadril','Agachamento até cadeira','Movimentos de braços','Mobilidade']],['Sexta','Circuito leve',['Caminhada no lugar','Alternar pernas e braços','Pausas','Mobilidade final']]],gym:[['Segunda','Treino geral A',['Aquecimento leve','Leg press confortável','Remada sentada','Supino em máquina']],['Quarta','Treino geral B',['Aquecimento','Extensora confortável','Puxada frontal','Desenvolvimento']],['Sexta','Treino geral C',['Aquecimento','Corpo inteiro','Intervalos adequados','Aeróbico leve']]],run:[['Terça','Caminhada + trote',['5 min de caminhada','Alternar caminhada e trote','Ritmo conversável','Caminhar ao final']],['Quinta','Ritmo confortável',['Aquecimento','Corrida ou caminhada confortável','Reduzir se necessário','Desacelerar']],['Sábado','Sessão leve',['Caminhada inicial','Percurso curto','Pausas quando necessário','Volta à calma']]]};function ex(k='home'){$('#exView').innerHTML=`<div class="schedule">${plans[k].map(x=>`<article class="session"><span class="day">${x[0]}</span><b>${x[1]}</b><ul>${x[2].map(y=>`<li>${y}</li>`).join('')}</ul></article>`).join('')}</div>`}$$('#exTabs .sub').forEach(b=>b.onclick=()=>{$$('#exTabs .sub').forEach(x=>x.classList.toggle('active',x===b));ex(b.dataset.ex)});foodTabs();ex();
+
+function dayPlan(i){
+  let out=`<div class="note"><b>${days[i]}${i===today()?' · Hoje':''}</b> · ${user?'IMC calculado disponível; as opções permanecem gerais.':'Opções gerais para adultos, sem depender do IMC.'}</div>`;
+  [['Café da manhã','breakfast'],['Almoço','lunch'],['Café da tarde','snack'],['Jantar','dinner']].forEach(([t,k])=>{
+    const a=rot(meals[k],i);
+    out+=`<div class="meal-block"><h3>${t}</h3><div class="meals">${a.map((m,j)=>`<article class="meal"><img loading="lazy" decoding="async" src="${m[2]}" alt="Foto de ${m[0]}" onerror="this.onerror=null;this.src=photoFallback"><div class="body"><span class="opt">Opção ${j+1}</span><h4>${m[0]}</h4><p>${m[1]}</p></div></article>`).join('')}</div></div>`;
+  });
+  $('#foodView').innerHTML=out;
+}
+
+const shopping={
+  1:[['Ovos','12 un.','7 dias'],['Pão integral','1 pacote','5–7 dias'],['Frutas','14 un.','3–4 dias'],['Arroz','1 kg','14–30 dias'],['Feijão','500 g','14 dias'],['Frango','1 kg','7 dias'],['Folhas','2 maços','3–4 dias'],['Legumes','1,5 kg','4–7 dias'],['Iogurte','7 un.','7 dias']],
+  2:[['Iogurte','7 un.','7 dias'],['Aveia','500 g','20–30 dias'],['Frutas','14 un.','3–4 dias'],['Peixe','1,2 kg','7 dias'],['Batata/mandioca','1 kg','7–10 dias'],['Legumes','2 kg','4–7 dias'],['Pão integral','1 pacote','5–7 dias'],['Queijo branco','300 g','5–7 dias']],
+  3:[['Tapioca','500 g','14–20 dias'],['Queijo branco','400 g','5–7 dias'],['Frutas','14 un.','3–4 dias'],['Carne magra','1 kg','7 dias'],['Arroz','1 kg','14–30 dias'],['Feijão','500 g','14 dias'],['Vegetais','2 kg','4–7 dias'],['Castanhas','200 g','14–20 dias']]
+};
+
+function shop(){
+  const a=shopping[buy];
+  $('#foodView').innerHTML=`<h3>Compras do plano</h3><div class="shop-options">${[1,2,3].map(n=>`<button data-buy="${n}" class="${n===buy?'active':''}">Opção ${n}</button>`).join('')}</div><div class="cycles"><div class="cycle"><b>Hortifruti</b><span>3–4 dias</span></div><div class="cycle"><b>Refrigerados</b><span>5–7 dias</span></div><div class="cycle"><b>Proteínas</b><span>7 dias</span></div><div class="cycle"><b>Secos</b><span>14–30 dias</span></div></div><div class="shopping">${a.map(x=>`<div class="shop-row"><b>${x[0]}</b><strong>${x[1]}</strong><span>Repor em ${x[2]}</span></div>`).join('')}</div><div class="muted" style="margin-top:8px">Quantidades aproximadas para organização de compras; ajuste conforme consumo da casa e validade dos alimentos.</div>`;
+  $$('[data-buy]').forEach(b=>b.onclick=()=>{buy=+b.dataset.buy;shop()});
+}
+
+function foodTab(k){
+  $$('#foodTabs .sub').forEach(b=>b.classList.toggle('active',b.dataset.food===k));
+  k==='shop'?shop():dayPlan(+k);
+}
+
+function foodTabs(){
+  const t=today();
+  $('#foodTabs').innerHTML=`<button class="sub" data-food="shop">🛒 Compras</button>`+days.map((d,i)=>`<button class="sub ${i===t?'active':''}" data-food="${i}">${d}${i===t?' · Hoje':''}</button>`).join('');
+  $$('#foodTabs .sub').forEach(b=>b.onclick=()=>foodTab(b.dataset.food));
+  dayPlan(t);
+}
+
+const plans={
+  home:[['Segunda','Corpo inteiro',['5–8 min de aquecimento leve','Sentar e levantar da cadeira','Flexão na parede','Panturrilhas','Mobilidade final']],['Quarta','Força + mobilidade',['Ponte de quadril','Agachamento até cadeira','Movimentos de braços','Mobilidade']],['Sexta','Circuito leve',['Caminhada no lugar','Alternar pernas e braços','Pausas','Mobilidade final']]],
+  gym:[['Segunda','Treino geral A',['Aquecimento leve','Leg press confortável','Remada sentada','Supino em máquina']],['Quarta','Treino geral B',['Aquecimento','Extensora confortável','Puxada frontal','Desenvolvimento']],['Sexta','Treino geral C',['Aquecimento','Corpo inteiro','Intervalos adequados','Aeróbico leve']]],
+  run:[['Terça','Caminhada + trote',['5 min de caminhada','Alternar caminhada e trote','Ritmo conversável','Caminhar ao final']],['Quinta','Ritmo confortável',['Aquecimento','Corrida ou caminhada confortável','Reduzir se necessário','Desacelerar']],['Sábado','Sessão leve',['Caminhada inicial','Percurso curto','Pausas quando necessário','Volta à calma']]]
+};
+
+function ex(k='home'){
+  $('#exView').innerHTML=`<div class="schedule">${plans[k].map(x=>`<article class="session"><span class="day">${x[0]}</span><b>${x[1]}</b><ul>${x[2].map(y=>`<li>${y}</li>`).join('')}</ul></article>`).join('')}</div>`;
+}
+$$('#exTabs .sub').forEach(b=>b.onclick=()=>{$$('#exTabs .sub').forEach(x=>x.classList.toggle('active',x===b));ex(b.dataset.ex)});
+
+foodTabs();
+ex();
 </script>
 </body>
 </html>
